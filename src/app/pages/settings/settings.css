@@ -1,0 +1,525 @@
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+  width: 100%;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.page-header h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  color: #3b312c;
+  font-weight: 700;
+}
+
+.page-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #968a82;
+}
+
+/* =========================
+   SETTINGS CONTAINER
+========================= */
+
+.settings-container {
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   SETTINGS CARD
+========================= */
+
+.settings-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  background: #fffdfb;
+
+  border: 1px solid #eee4dc;
+  border-radius: 14px;
+
+  padding: 22px;
+
+  box-shadow: 0 3px 12px rgba(80, 55, 40, 0.04);
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+.settings-card-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #f1e9e3;
+}
+
+.settings-card-header h2 {
+  margin: 0 0 5px;
+
+  font-size: 18px;
+
+  color: #3b312c;
+}
+
+.settings-card-header p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #968a82;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 20px;
+
+  box-sizing: border-box;
+}
+
+.form-group {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-group label {
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #5e514a;
+}
+
+.form-group input {
+  width: 100%;
+  max-width: 100%;
+
+  padding: 11px 13px;
+
+  border: 1px solid #eadfd6;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #4d413b;
+
+  font-size: 14px;
+
+  outline: none;
+
+  box-sizing: border-box;
+
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #e5a45f;
+}
+
+.form-group input::placeholder {
+  color: #b3a8a1;
+}
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.save-btn {
+  padding: 10px 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #eab06f;
+
+  color: #4b3524;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  box-sizing: border-box;
+}
+
+.save-btn:hover {
+  background: #f0bd82;
+
+  transform: translateY(-1px);
+}
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+.notification-list {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  margin-bottom: 20px;
+
+  box-sizing: border-box;
+}
+
+.notification-item {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #f1e9e3;
+
+  box-sizing: border-box;
+}
+
+.notification-item > div {
+  min-width: 0;
+}
+
+.notification-item:first-child {
+  padding-top: 0;
+}
+
+.notification-item h3 {
+  margin: 0 0 4px;
+
+  font-size: 14px;
+
+  color: #51453e;
+}
+
+.notification-item p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #968a82;
+
+  line-height: 1.5;
+}
+
+/* =========================
+   TOGGLE SWITCH
+========================= */
+
+.switch {
+  position: relative;
+
+  display: inline-block;
+
+  width: 46px;
+  min-width: 46px;
+
+  height: 25px;
+
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+
+  inset: 0;
+
+  background: #e8e0da;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.slider::before {
+  content: "";
+
+  position: absolute;
+
+  width: 19px;
+  height: 19px;
+
+  left: 3px;
+  bottom: 3px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  transition: 0.3s ease;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.switch input:checked + .slider {
+  background: #eab06f;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(21px);
+}
+
+/* =========================
+   SECURITY
+========================= */
+
+.password-grid {
+  margin-bottom: 20px;
+}
+
+.security-btn {
+  background: #d99652;
+}
+
+.security-btn:hover {
+  background: #e5a45f;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+  .form-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+  .page-header {
+    margin-bottom: 18px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .settings-container {
+    gap: 14px;
+  }
+
+  .settings-card {
+    padding: 17px;
+
+    border-radius: 11px;
+  }
+
+  .settings-card-header {
+    margin-bottom: 17px;
+    padding-bottom: 13px;
+  }
+
+  .settings-card-header h2 {
+    font-size: 17px;
+  }
+
+  .settings-card-header p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 17px;
+  }
+
+  .form-group input {
+    padding: 11px 12px;
+
+    font-size: 13px;
+  }
+
+  .notification-item {
+    gap: 15px;
+
+    padding: 14px 0;
+  }
+
+  .notification-item h3 {
+    font-size: 13px;
+  }
+
+  .notification-item p {
+    font-size: 12px;
+  }
+
+  .save-btn {
+    width: 100%;
+
+    min-height: 42px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 450px) {
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .settings-card {
+    padding: 14px;
+
+    border-radius: 10px;
+  }
+
+  .settings-card-header {
+    margin-bottom: 15px;
+  }
+
+  .settings-card-header h2 {
+    font-size: 16px;
+  }
+
+  .settings-card-header p {
+    font-size: 11px;
+  }
+
+  .form-grid {
+    gap: 13px;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group input {
+    padding: 10px 11px;
+
+    font-size: 13px;
+  }
+
+  .notification-item {
+    gap: 12px;
+  }
+
+  .notification-item h3 {
+    font-size: 12px;
+  }
+
+  .notification-item p {
+    font-size: 11px;
+  }
+
+  .switch {
+    width: 44px;
+    min-width: 44px;
+  }
+
+  .slider::before {
+    width: 18px;
+    height: 18px;
+  }
+
+  .switch input:checked + .slider::before {
+    transform: translateX(20px);
+  }
+}
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 360px) {
+  .page-header h1 {
+    font-size: 21px;
+  }
+
+  .settings-card {
+    padding: 12px;
+  }
+
+  .notification-item {
+    gap: 8px;
+  }
+
+  .notification-item p {
+    line-height: 1.4;
+  }
+
+  .switch {
+    width: 42px;
+    min-width: 42px;
+    height: 24px;
+  }
+
+  .slider::before {
+    width: 18px;
+    height: 18px;
+  }
+
+  .switch input:checked + .slider::before {
+    transform: translateX(18px);
+  }
+}

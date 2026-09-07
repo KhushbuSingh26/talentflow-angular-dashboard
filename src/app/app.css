@@ -1,0 +1,98 @@
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.main-layout {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  min-height: 100vh;
+
+  background: #f3f4f6;
+
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+  width: 100%;
+  max-width: 100%;
+
+  padding: 35px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+.main-content h1 {
+  margin: 0;
+  color: #111827;
+}
+
+.main-content p {
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+
+  .main-layout {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+  }
+
+  .main-content {
+    padding: 25px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .main-layout {
+    margin-left: 64px;
+    width: calc(100% - 64px);
+
+    min-width: 0;
+  }
+
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 18px 14px;
+
+    overflow-x: hidden;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .main-layout {
+    margin-left: 64px;
+    width: calc(100% - 64px);
+  }
+
+  .main-content {
+    padding: 14px 10px;
+  }
+}

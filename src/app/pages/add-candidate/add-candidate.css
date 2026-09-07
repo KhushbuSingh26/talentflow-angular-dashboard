@@ -1,0 +1,259 @@
+/* =========================
+   ADD CANDIDATE PAGE
+========================= */
+
+.add-candidate-page {
+  min-height: 100vh;
+  padding: 30px;
+  background: #f6f8fc;
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.back-btn {
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 14px;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.page-header h1 {
+  margin: 0 0 7px;
+  font-size: 30px;
+  color: #1e293b;
+}
+
+.page-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.candidate-form {
+  max-width: 1100px;
+}
+
+.form-card {
+  background: #ffffff;
+  border: 1px solid #e6ebf2;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.form-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.form-card-header h2 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.form-card-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.section-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.full-grid {
+  grid-template-columns: 1fr;
+}
+
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-group label span {
+  color: #ef4444;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dbe2ea;
+  background: #ffffff;
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #1e293b;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================
+   FORM ACTIONS
+========================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px 0 30px;
+}
+
+.cancel-btn,
+.save-btn {
+  border: none;
+  border-radius: 9px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.cancel-btn {
+  background: #ffffff;
+  border: 1px solid #dbe2ea;
+  color: #475569;
+}
+
+.cancel-btn:hover {
+  background: #f8fafc;
+}
+
+.save-btn {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.save-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .add-candidate-page {
+    padding: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .add-candidate-page {
+    padding: 15px;
+  }
+
+  .form-card {
+    padding: 18px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+
+}

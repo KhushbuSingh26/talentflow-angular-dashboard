@@ -1,0 +1,836 @@
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 22px;
+
+  box-sizing: border-box;
+}
+
+.page-header > div {
+  min-width: 0;
+}
+
+.page-header h1 {
+  margin: 0 0 5px;
+
+  font-size: 28px;
+
+  color: #26384a;
+
+  font-weight: 700;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: #718096;
+
+  font-size: 14px;
+}
+
+/* =========================
+   DATE FILTER
+========================= */
+
+.date-filter {
+  width: auto;
+  min-width: 145px;
+  max-width: 100%;
+
+  padding: 10px 15px;
+
+  border: 1px solid #d9e6f2;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #536577;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  outline: none;
+
+  transition: all 0.25s ease;
+
+  box-sizing: border-box;
+}
+
+.date-filter:hover {
+  border-color: #9fc3e1;
+}
+
+.date-filter:focus {
+  border-color: #82b6e8;
+
+  box-shadow: 0 0 0 3px rgba(130, 182, 232, 0.14);
+}
+
+/* =========================
+   STATISTICS CARDS
+========================= */
+
+.stats-grid {
+  width: 100%;
+  max-width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 22px;
+
+  box-sizing: border-box;
+}
+
+.stat-card {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e0eaf2;
+
+  border-radius: 12px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 3px 12px rgba(61, 91, 116, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  box-sizing: border-box;
+}
+
+/* Small blue accent */
+
+.stat-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: #82b6e8;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #cbddea;
+
+  box-shadow:
+    0 9px 24px rgba(61, 91, 116, 0.11);
+}
+
+.stat-title {
+  margin: 0 0 9px;
+
+  color: #718096;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.stat-card h2 {
+  margin: 0 0 10px;
+
+  font-size: 28px;
+
+  color: #2f4052;
+
+  font-weight: 700;
+}
+
+.stat-bottom {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.stat-change {
+  color: #5c91bd;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.stat-description {
+  color: #8b98a5;
+
+  font-size: 12px;
+}
+
+/* =========================
+   ANALYTICS GRID
+========================= */
+
+.analytics-grid {
+  width: 100%;
+  max-width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(0, 0.9fr);
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+
+  box-sizing: border-box;
+}
+
+.bottom-grid {
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+}
+
+/* =========================
+   ANALYTICS CARDS
+========================= */
+
+.analytics-card {
+  min-width: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e0eaf2;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  box-shadow:
+    0 3px 12px rgba(61, 91, 116, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+.analytics-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #cfdeea;
+
+  box-shadow:
+    0 9px 24px rgba(61, 91, 116, 0.09);
+}
+
+.card-header {
+  min-width: 0;
+
+  margin-bottom: 15px;
+}
+
+.card-header h2 {
+  margin: 0 0 5px;
+
+  font-size: 18px;
+
+  color: #304457;
+
+  font-weight: 650;
+}
+
+.card-header p {
+  margin: 0;
+
+  color: #8493a1;
+
+  font-size: 13px;
+}
+
+/* =========================
+   RECRUITMENT BAR CHART
+========================= */
+
+.chart-container {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 620px;
+
+  height: 240px;
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+.chart-container canvas {
+  display: block;
+
+  max-width: 100% !important;
+}
+
+/* =========================
+   HIRING SEMI-CIRCLE CHART
+========================= */
+
+.hiring-chart-container {
+  width: 100%;
+
+  height: 240px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+.hiring-chart-wrapper {
+  position: relative;
+
+  width: 220px;
+
+  max-width: 100%;
+
+  height: 150px;
+
+  box-sizing: border-box;
+}
+
+.hiring-chart-wrapper canvas {
+  display: block;
+
+  width: 100% !important;
+
+  height: 100% !important;
+
+  max-width: 100% !important;
+}
+
+.chart-center {
+  position: absolute;
+
+  top: 62%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.chart-center strong {
+  display: block;
+
+  font-size: 28px;
+
+  color: #6b8fc1;
+
+  font-weight: 700;
+}
+
+.chart-center span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 12px;
+
+  color: #8493a1;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   CANDIDATE DOUGHNUT CHART
+========================= */
+
+.candidate-chart-container {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 390px;
+
+  height: 330px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+.candidate-chart-container canvas {
+  display: block;
+
+  width: 100% !important;
+
+  height: 100% !important;
+
+  max-width: 100% !important;
+}
+
+/* =========================
+   CANDIDATE PIPELINE
+========================= */
+
+.status-list {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 19px;
+
+  padding-top: 5px;
+
+  box-sizing: border-box;
+}
+
+.status-item {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.status-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.status-info strong {
+  color: #42566a;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  min-width: 0;
+}
+
+.status-info span {
+  color: #8795a3;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+.status-progress {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+.progress-background {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 7px;
+
+  background: #e7eef5;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.status-progress-bar {
+  height: 100%;
+
+  background: #82b6e8;
+
+  border-radius: 20px;
+
+  transition: width 0.5s ease;
+}
+
+.percentage {
+  width: 35px;
+
+  min-width: 35px;
+
+  color: #607589;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-align: right;
+}
+
+/* =========================
+   BLUE ACCENT DETAILS
+========================= */
+
+.recruitment-card {
+  border-top: 3px solid #82b6e8;
+}
+
+.hiring-card {
+  border-top: 3px solid #b7d3ed;
+}
+
+.candidate-card {
+  border-top: 3px solid #9c83d4;
+}
+
+.pipeline-card {
+  border-top: 3px solid #8fc7b5;
+}
+
+/* =========================
+   TABLET RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .analytics-grid,
+  .bottom-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chart-container {
+    max-width: 700px;
+  }
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  .page-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 14px;
+  }
+
+  .page-header h1 {
+    font-size: 26px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .date-filter {
+    width: 100%;
+
+    min-width: 0;
+
+    height: 44px;
+  }
+
+  .stats-grid {
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .analytics-grid,
+  .bottom-grid {
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 14px;
+  }
+
+  .analytics-card {
+    padding: 16px;
+
+    border-radius: 12px;
+  }
+
+  .card-header {
+    margin-bottom: 13px;
+  }
+
+  .card-header h2 {
+    font-size: 17px;
+  }
+
+  .card-header p {
+    font-size: 12px;
+  }
+
+  .chart-container {
+    width: 100%;
+
+    height: 220px;
+
+    max-width: 100%;
+  }
+
+  .hiring-chart-container {
+    width: 100%;
+
+    height: 220px;
+  }
+
+  .candidate-chart-container {
+    width: 100%;
+
+    height: 250px;
+
+    max-width: 100%;
+  }
+
+  .hiring-chart-wrapper {
+    width: 210px;
+
+    height: 145px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 450px) {
+  .page-header {
+    gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .stats-grid {
+    gap: 10px;
+
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    padding: 14px;
+
+    border-radius: 10px;
+  }
+
+  .stat-title {
+    font-size: 13px;
+  }
+
+  .stat-card h2 {
+    font-size: 25px;
+  }
+
+  .stat-change {
+    font-size: 12px;
+  }
+
+  .stat-description {
+    font-size: 11px;
+  }
+
+  .analytics-grid,
+  .bottom-grid {
+    gap: 12px;
+
+    margin-bottom: 12px;
+  }
+
+  .analytics-card {
+    padding: 13px;
+
+    border-radius: 10px;
+  }
+
+  .card-header h2 {
+    font-size: 16px;
+  }
+
+  .card-header p {
+    font-size: 11px;
+  }
+
+  .chart-container {
+    height: 200px;
+  }
+
+  .hiring-chart-container {
+    height: 200px;
+  }
+
+  .hiring-chart-wrapper {
+    width: 190px;
+
+    height: 135px;
+  }
+
+  .chart-center strong {
+    font-size: 25px;
+  }
+
+  .chart-center span {
+    font-size: 11px;
+  }
+
+  .candidate-chart-container {
+    height: 230px;
+  }
+
+  .status-list {
+    gap: 15px;
+  }
+
+  .status-info strong {
+    font-size: 13px;
+  }
+
+  .status-info span {
+    font-size: 11px;
+  }
+
+  .status-progress {
+    gap: 8px;
+  }
+
+  .percentage {
+    width: 32px;
+
+    min-width: 32px;
+
+    font-size: 11px;
+  }
+}
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 360px) {
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .date-filter {
+    height: 42px;
+
+    font-size: 13px;
+  }
+
+  .stat-card {
+    padding: 13px;
+  }
+
+  .analytics-card {
+    padding: 11px;
+  }
+
+  .chart-container {
+    height: 185px;
+  }
+
+  .hiring-chart-container {
+    height: 185px;
+  }
+
+  .hiring-chart-wrapper {
+    width: 175px;
+
+    height: 125px;
+  }
+
+  .candidate-chart-container {
+    height: 210px;
+  }
+
+  .status-info {
+    gap: 8px;
+  }
+
+  .status-info strong {
+    font-size: 12px;
+  }
+
+  .status-info span {
+    font-size: 10px;
+  }
+}

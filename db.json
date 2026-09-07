@@ -1,0 +1,306 @@
+{
+  "jobs": [
+    {
+      "id": "tRoWm0bCy8s",
+      "title": "Frontend Developer",
+      "department": "Engineering",
+      "location": "New Delhi, India",
+      "type": "Full Time",
+      "status": "Open",
+      "applicants": 3
+    },
+    {
+      "id": "34pIsnEWCPw",
+      "title": "UI/UX Designer",
+      "department": "Design",
+      "location": "Remote",
+      "type": "Full Time",
+      "status": "Open",
+      "applicants": 2
+    },
+    {
+      "id": "xju-v5y1qjM",
+      "title": "Angular Developer",
+      "department": "Engineering",
+      "location": "Bangalore, India",
+      "type": "Full Time",
+      "status": "Open",
+      "applicants": 1
+    },
+    {
+      "id": "n2hQPCH29bg",
+      "title": "Backend Developer",
+      "department": "Engineering",
+      "location": "Mumbai, India",
+      "type": "Full Time",
+      "status": "Closed",
+      "applicants": 1
+    },
+    {
+      "id": "27ogF1VJMbM",
+      "title": "HR Executive",
+      "department": "Human Resources",
+      "location": "Gurgaon, India",
+      "type": "Full Time",
+      "status": "Draft",
+      "applicants": 1
+    },
+    {
+      "id": "qOnG91-nRFc",
+      "title": "web tech",
+      "department": "designer",
+      "location": "mumbai",
+      "type": "Part Time",
+      "status": "Open",
+      "applicants": 1
+    }
+  ],
+  "candidates": [
+    {
+      "id": "iBj0OnIu3so",
+      "name": "khushi sing",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "",
+      "position": "Frontend Developer",
+      "experience": "",
+      "status": "Screening",
+      "appliedDate": "9/3/2026",
+      "jobId": "tRoWm0bCy8s"
+    },
+    {
+      "id": "m5wlbHaFDpY",
+      "name": "shivam",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "",
+      "position": "Angular Developer",
+      "experience": "",
+      "status": "Interview",
+      "appliedDate": "9/3/2026",
+      "jobId": "xju-v5y1qjM"
+    },
+    {
+      "id": "ShHP3tngENw",
+      "name": "tusi",
+      "email": "tusi@gmail.com",
+      "phone": "",
+      "position": "Backend Developer",
+      "experience": "",
+      "status": "Rejected",
+      "appliedDate": "9/3/2026",
+      "jobId": "n2hQPCH29bg"
+    },
+    {
+      "id": "G8E6ZN42qsU",
+      "name": "john",
+      "email": "john@gmail.com",
+      "phone": "",
+      "position": "HR Executive",
+      "experience": "",
+      "status": "Interview",
+      "appliedDate": "9/3/2026",
+      "jobId": "27ogF1VJMbM"
+    },
+    {
+      "id": "b9st19pswO4",
+      "name": "mansi",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "",
+      "position": "UI/UX Designer",
+      "experience": "",
+      "status": "Screening",
+      "appliedDate": "9/3/2026",
+      "jobId": "34pIsnEWCPw"
+    },
+    {
+      "id": "T8M5TLXkOUw",
+      "name": "harsh",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "",
+      "position": "UI/UX Designer",
+      "experience": "",
+      "status": "Screening",
+      "appliedDate": "9/3/2026",
+      "jobId": "34pIsnEWCPw"
+    },
+    {
+      "id": "wzfl9qdiEnE",
+      "name": "khushbu",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "",
+      "position": "Frontend Developer",
+      "experience": "",
+      "status": "Interview",
+      "appliedDate": "9/3/2026",
+      "jobId": "tRoWm0bCy8s"
+    },
+    {
+      "id": "u8Ka4FnB83s",
+      "name": "khush",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "",
+      "position": "Frontend Developer",
+      "experience": "",
+      "status": "Screening",
+      "appliedDate": "9/3/2026",
+      "jobId": "tRoWm0bCy8s"
+    },
+    {
+      "id": "nHrtZ2kBVY0",
+      "name": "sankalp",
+      "email": "sankalp@gmail.com",
+      "phone": "",
+      "position": "HR Executive",
+      "experience": "",
+      "status": "Applied",
+      "appliedDate": "9/3/2026",
+      "jobId": "27ogF1VJMbM"
+    },
+    {
+      "id": "6RqhedA53Ag",
+      "name": "veer pratap",
+      "email": "veer@gmail.com",
+      "phone": "",
+      "position": "Frontend Developer",
+      "experience": "",
+      "status": "Interview",
+      "appliedDate": "9/3/2026",
+      "jobId": "tRoWm0bCy8s"
+    },
+    {
+      "id": "jQy-mjWzQto",
+      "name": "himanshi sharma",
+      "email": "himanshi@gmail.com",
+      "phone": "",
+      "position": "web tech",
+      "experience": "",
+      "status": "Selected",
+      "appliedDate": "9/3/2026",
+      "jobId": "qOnG91-nRFc"
+    },
+    {
+      "id": "-F0pp8Q3z2U",
+      "name": "rani ray",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "9818909243",
+      "position": "python developer",
+      "experience": "5-8 Years",
+      "status": "Interview",
+      "appliedDate": "9/7/2026"
+    },
+    {
+      "id": "BJvCUWOJOPY",
+      "name": "golu singh",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "9818909243",
+      "position": "test tech",
+      "experience": "3-5 Years",
+      "status": "Rejected",
+      "appliedDate": "9/7/2026"
+    },
+    {
+      "id": "zK9xq_ZOWok",
+      "name": "sujal kaur",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "8383083443",
+      "position": "test tech",
+      "experience": "5-8 Years",
+      "status": "Interview",
+      "appliedDate": "9/7/2026"
+    },
+    {
+      "id": "rl1nC0szGaQ",
+      "name": "shilpa Khushbu",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "8851339343",
+      "position": "python developer",
+      "experience": "0-1 Years",
+      "status": "Shortlisted",
+      "appliedDate": "9/7/2026"
+    },
+    {
+      "id": "3v4gkJjlNBo",
+      "name": "prema toppo",
+      "email": "khushbusingh5494@gmail.com",
+      "phone": "8851339343",
+      "position": "react developer",
+      "experience": "3-5 Years",
+      "status": "Shortlisted",
+      "appliedDate": "9/7/2026"
+    },
+    {
+      "id": "N_l0f-NZGh0",
+      "name": "jaspreet sharma",
+      "email": "jasi@gmail.com",
+      "phone": "9818909243",
+      "position": "Frontend Developer",
+      "experience": "3-5 Years",
+      "status": "Interview",
+      "appliedDate": "9/7/2026"
+    },
+    {
+      "id": "bWjnPQyWBtg",
+      "name": "somya",
+      "email": "somya@gmail.com",
+      "phone": "",
+      "position": "Frontend Developer",
+      "experience": "",
+      "status": "Selected",
+      "appliedDate": "9/7/2026",
+      "jobId": "tRoWm0bCy8s"
+    },
+    {
+      "id": "Gd-MYha602s",
+      "name": "subahsh singh",
+      "email": "subhash@gmail.com",
+      "phone": "",
+      "position": "UI/UX Designer",
+      "experience": "",
+      "status": "Selected",
+      "appliedDate": "9/7/2026",
+      "jobId": "34pIsnEWCPw"
+    }
+  ],
+  "interviews": [
+    {
+      "id": "6yLV_ur2QrQ",
+      "candidate": "khushi",
+      "position": "Frontend Developer",
+      "interviewer": "shivam",
+      "date": "Oct 1, 2026",
+      "time": "1:46 AM",
+      "type": "Phone",
+      "status": "Cancelled"
+    },
+    {
+      "id": "0b0Id72C5rI",
+      "candidate": "john",
+      "position": "HR Executive",
+      "interviewer": "mena",
+      "date": "Oct 2, 2026",
+      "time": "11:37 PM",
+      "type": "In Person",
+      "status": "Completed"
+    },
+    {
+      "id": "_fuDL2WRZeg",
+      "candidate": "prema toppo",
+      "position": "react developer",
+      "interviewer": "jaspreet singh",
+      "date": "Sep 17, 2026",
+      "time": "2:55 PM",
+      "type": "In Person",
+      "status": "Completed"
+    },
+    {
+      "id": "OeldkCdvWg8",
+      "candidate": "subahsh singh",
+      "position": "UI/UX Designer",
+      "interviewer": "shivam",
+      "date": "Sep 21, 2026",
+      "time": "7:11 PM",
+      "type": "Phone",
+      "status": "Completed"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

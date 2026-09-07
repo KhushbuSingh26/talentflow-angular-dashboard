@@ -1,0 +1,622 @@
+<div class="candidates-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <h1>Candidates</h1>
+
+      <p>
+        Manage and track your candidates
+      </p>
+    </div>
+
+    <!-- OPEN ADD CANDIDATE MODAL -->
+    <button
+      type="button"
+      class="save-btn"
+      (click)="openAddModal()"
+    >
+      Add Candidate
+    </button>
+
+  </div>
+
+
+  <!-- SEARCH & FILTER -->
+
+  <div class="filters">
+
+    <div class="search-box">
+
+      <span class="search-icon">
+        🔍
+      </span>
+
+      <input
+        type="text"
+        placeholder="Search candidates..."
+        [(ngModel)]="searchTerm"
+      />
+
+    </div>
+
+
+    <select
+      class="status-filter"
+      [(ngModel)]="selectedStatus"
+    >
+
+      <option value="All Status">
+        All Status
+      </option>
+
+      <option value="Applied">
+        Applied
+      </option>
+
+      <option value="Screening">
+        Screening
+      </option>
+
+      <option value="Interview">
+        Interview
+      </option>
+
+      <option value="Selected">
+        Selected
+      </option>
+
+      <option value="Rejected">
+        Rejected
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <!-- CANDIDATES TABLE -->
+
+  <div class="table-card">
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Candidate</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Applied Date</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let candidate of filteredCandidates"
+          >
+
+            <!-- CANDIDATE -->
+
+            <td>
+
+              <div class="candidate-info">
+
+                <div class="candidate-avatar">
+
+                  {{
+                    candidate.name
+                      ? candidate.name.charAt(0).toUpperCase()
+                      : '?'
+                  }}
+
+                </div>
+
+                <div>
+
+                  <div class="candidate-name">
+                    {{ candidate.name }}
+                  </div>
+
+                  <div class="candidate-email">
+                    {{ candidate.email }}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- POSITION -->
+
+            <td>
+
+              <span class="position-text">
+                {{ candidate.position }}
+              </span>
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'status-applied':
+                    candidate.status === 'Applied',
+
+                  'status-screening':
+                    candidate.status === 'Screening',
+
+                  'status-interview':
+                    candidate.status === 'Interview',
+
+                  'status-selected':
+                    candidate.status === 'Selected',
+
+                  'status-rejected':
+                    candidate.status === 'Rejected'
+                }"
+              >
+
+                {{ candidate.status }}
+
+              </span>
+
+            </td>
+
+
+            <!-- DATE -->
+
+            <td>
+              {{ candidate.appliedDate }}
+            </td>
+
+
+            <!-- ACTION -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="openEditModal(candidate)"
+                  title="Edit Candidate"
+                >
+                  ✏️
+                </button>
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteCandidate(candidate.id)"
+                  title="Delete Candidate"
+                >
+                  🗑️
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+
+          <tr
+            *ngIf="filteredCandidates.length === 0"
+          >
+
+            <td
+              colspan="5"
+              class="empty-state"
+            >
+
+              <div>
+
+                <div class="empty-icon">
+                  👤
+                </div>
+
+                <h3>
+                  No candidates found
+                </h3>
+
+                <p>
+                  Try changing your search or
+                  status filter.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ADD CANDIDATE MODAL
+  =========================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="showAddModal"
+    (click)="closeAddModal()"
+  >
+
+    <div
+      class="modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- HEADER -->
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            Add Candidate
+          </h2>
+
+          <p>
+            Add a new candidate to a job
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="close-btn"
+          (click)="closeAddModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- BODY -->
+
+      <div class="modal-body">
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+          <label>
+            Candidate Name
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter candidate name"
+            [(ngModel)]="newCandidate.name"
+          />
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            placeholder="Enter candidate email"
+            [(ngModel)]="newCandidate.email"
+          />
+
+        </div>
+
+
+        <!-- JOB -->
+
+        <div class="form-group">
+
+          <label>
+            Job
+          </label>
+
+          <select
+            [(ngModel)]="newCandidate.jobId"
+            (change)="onJobSelected()"
+          >
+
+            <option value="">
+              Select a job
+            </option>
+
+            <option
+              *ngFor="let job of jobs"
+              [value]="job.id"
+            >
+              {{ job.title }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="form-group">
+
+          <label>
+            Status
+          </label>
+
+          <select
+            [(ngModel)]="newCandidate.status"
+          >
+
+            <option value="Applied">
+              Applied
+            </option>
+
+            <option value="Screening">
+              Screening
+            </option>
+
+            <option value="Interview">
+              Interview
+            </option>
+
+            <option value="Selected">
+              Selected
+            </option>
+
+            <option value="Rejected">
+              Rejected
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeAddModal()"
+        >
+          Cancel
+        </button>
+
+
+        <!-- ACTUAL ADD CANDIDATE BUTTON -->
+
+        <button
+          type="button"
+          class="save-btn"
+          (click)="addCandidate()"
+          [disabled]="isAddingCandidate"
+        >
+
+          {{
+            isAddingCandidate
+              ? 'Adding...'
+              : 'Add Candidate'
+          }}
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       EDIT CANDIDATE MODAL
+  =========================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="showEditModal"
+    (click)="closeEditModal()"
+  >
+
+    <div
+      class="modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- HEADER -->
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            Edit Candidate
+          </h2>
+
+          <p>
+            Update candidate information
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="close-btn"
+          (click)="closeEditModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- BODY -->
+
+      <div
+        class="modal-body"
+        *ngIf="editingCandidate"
+      >
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+          <label>
+            Candidate Name
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter candidate name"
+            [(ngModel)]="editingCandidate.name"
+          />
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            placeholder="Enter candidate email"
+            [(ngModel)]="editingCandidate.email"
+          />
+
+        </div>
+
+
+        <!-- JOB -->
+
+        <div class="form-group">
+
+          <label>
+            Job
+          </label>
+
+          <select
+            [(ngModel)]="editingCandidate.jobId"
+            (change)="onEditJobSelected()"
+          >
+
+            <option value="">
+              Select a job
+            </option>
+
+            <option
+              *ngFor="let job of jobs"
+              [value]="job.id"
+            >
+              {{ job.title }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="form-group">
+
+          <label>
+            Status
+          </label>
+
+          <select
+            [(ngModel)]="editingCandidate.status"
+          >
+
+            <option value="Applied">
+              Applied
+            </option>
+
+            <option value="Screening">
+              Screening
+            </option>
+
+            <option value="Interview">
+              Interview
+            </option>
+
+            <option value="Selected">
+              Selected
+            </option>
+
+            <option value="Rejected">
+              Rejected
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeEditModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="save-btn"
+          (click)="updateCandidate()"
+        >
+          Update Candidate
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

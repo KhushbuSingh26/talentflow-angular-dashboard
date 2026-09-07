@@ -1,0 +1,225 @@
+<div class="page-header">
+  <div>
+    <h1>Settings</h1>
+    <p>Manage your account and application preferences.</p>
+  </div>
+</div>
+
+<div class="settings-container">
+
+  <!-- Profile Settings -->
+  <div class="settings-card">
+    <div class="settings-card-header">
+      <div>
+        <h2>Profile Settings</h2>
+        <p>Update your personal information.</p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input
+          type="text"
+          [(ngModel)]="profile.name"
+          placeholder="Enter your name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input
+          type="email"
+          [(ngModel)]="profile.email"
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Role</label>
+        <input
+          type="text"
+          [(ngModel)]="profile.role"
+          placeholder="Enter your role"
+        />
+      </div>
+    </div>
+
+    <button class="save-btn" (click)="saveProfile()">
+      Save Profile
+    </button>
+  </div>
+
+
+  <!-- Company Settings -->
+  <div class="settings-card">
+    <div class="settings-card-header">
+      <div>
+        <h2>Company Settings</h2>
+        <p>Manage your company information.</p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Company Name</label>
+        <input
+          type="text"
+          [(ngModel)]="company.name"
+          placeholder="Enter company name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input
+          type="text"
+          [(ngModel)]="company.location"
+          placeholder="Enter company location"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input
+          type="text"
+          [(ngModel)]="company.website"
+          placeholder="Enter website"
+        />
+      </div>
+    </div>
+
+    <button class="save-btn" (click)="saveCompany()">
+      Save Company
+    </button>
+  </div>
+
+
+  <!-- Notification Settings -->
+  <div class="settings-card">
+    <div class="settings-card-header">
+      <div>
+        <h2>Notifications</h2>
+        <p>Choose which notifications you want to receive.</p>
+      </div>
+    </div>
+
+    <div class="notification-list">
+
+      <div class="notification-item">
+        <div>
+          <h3>Email Notifications</h3>
+          <p>Receive important updates through email.</p>
+        </div>
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications.emailNotifications"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+
+      <div class="notification-item">
+        <div>
+          <h3>Interview Reminders</h3>
+          <p>Get reminders for upcoming interviews.</p>
+        </div>
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications.interviewReminders"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+
+      <div class="notification-item">
+        <div>
+          <h3>New Applications</h3>
+          <p>Get notified when new candidates apply.</p>
+        </div>
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications.newApplications"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+
+      <div class="notification-item">
+        <div>
+          <h3>Weekly Reports</h3>
+          <p>Receive a weekly recruitment summary.</p>
+        </div>
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications.weeklyReports"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+    </div>
+
+    <button class="save-btn" (click)="saveNotifications()">
+      Save Preferences
+    </button>
+  </div>
+
+
+  <!-- Security Settings -->
+  <div class="settings-card">
+    <div class="settings-card-header">
+      <div>
+        <h2>Security</h2>
+        <p>Change your account password.</p>
+      </div>
+    </div>
+
+    <div class="form-grid password-grid">
+
+      <div class="form-group">
+        <label>Current Password</label>
+        <input
+          type="password"
+          [(ngModel)]="security.currentPassword"
+          placeholder="Enter current password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>New Password</label>
+        <input
+          type="password"
+          [(ngModel)]="security.newPassword"
+          placeholder="Enter new password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          [(ngModel)]="security.confirmPassword"
+          placeholder="Confirm new password"
+        />
+      </div>
+
+    </div>
+
+    <button class="save-btn security-btn" (click)="changePassword()">
+      Change Password
+    </button>
+  </div>
+
+</div>

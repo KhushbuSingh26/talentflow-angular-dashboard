@@ -1,0 +1,495 @@
+<div class="page-header">
+
+  <div>
+    <h1>Jobs</h1>
+    <p>Manage and track all job openings.</p>
+  </div>
+
+  <button
+    type="button"
+    class="add-btn"
+    (click)="openAddModal()"
+  >
+    + Add Job
+  </button>
+
+</div>
+
+
+<!-- JOBS TABLE -->
+
+<div class="job-card">
+
+  <div class="table-header">
+
+    <input
+      type="text"
+      placeholder="🔍 Search jobs..."
+      [(ngModel)]="searchTerm"
+    />
+
+    <select [(ngModel)]="selectedStatus">
+      <option>All Status</option>
+      <option>Open</option>
+      <option>Closed</option>
+      <option>Draft</option>
+    </select>
+
+  </div>
+
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Job Title</th>
+          <th>Department</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Applicants</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        <tr *ngFor="let job of filteredJobs">
+
+          <td>
+            <strong>{{ job.title }}</strong>
+          </td>
+
+          <td>
+            {{ job.department }}
+          </td>
+
+          <td>
+            {{ job.location }}
+          </td>
+
+          <td>
+
+            <span class="job-type">
+              {{ job.type }}
+            </span>
+
+          </td>
+
+          <td>
+            {{ job.applicants }}
+          </td>
+
+          <td>
+
+            <span
+              class="status"
+              [ngClass]="job.status.toLowerCase()"
+            >
+              {{ job.status }}
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="action-buttons">
+
+              <button
+                type="button"
+                class="edit-btn"
+                (click)="openEditModal(job)"
+              >
+                Edit
+              </button>
+
+
+              <button
+                type="button"
+                class="delete-btn"
+                (click)="deleteJob(job.id)"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+
+        <!-- EMPTY STATE -->
+
+        <tr *ngIf="filteredJobs.length === 0">
+
+          <td
+            colspan="7"
+            class="empty-state"
+          >
+            No jobs found.
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     ADD JOB MODAL
+========================= -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>Add New Job</h2>
+
+        <p>
+          Enter the job details below.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeAddModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- JOB TITLE -->
+
+    <div class="form-group">
+
+      <label>
+        Job Title
+      </label>
+
+      <input
+        type="text"
+        placeholder="Enter job title"
+        [(ngModel)]="newJob.title"
+      />
+
+    </div>
+
+
+    <!-- DEPARTMENT -->
+
+    <div class="form-group">
+
+      <label>
+        Department
+      </label>
+
+      <input
+        type="text"
+        placeholder="Enter department"
+        [(ngModel)]="newJob.department"
+      />
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="form-group">
+
+      <label>
+        Location
+      </label>
+
+      <input
+        type="text"
+        placeholder="Enter location"
+        [(ngModel)]="newJob.location"
+      />
+
+    </div>
+
+
+    <!-- JOB TYPE -->
+
+    <div class="form-group">
+
+      <label>
+        Job Type
+      </label>
+
+      <select
+        [(ngModel)]="newJob.type"
+      >
+
+        <option>
+          Full Time
+        </option>
+
+        <option>
+          Part Time
+        </option>
+
+        <option>
+          Contract
+        </option>
+
+        <option>
+          Internship
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="form-group">
+
+      <label>
+        Status
+      </label>
+
+      <select
+        [(ngModel)]="newJob.status"
+      >
+
+        <option>
+          Open
+        </option>
+
+        <option>
+          Closed
+        </option>
+
+        <option>
+          Draft
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="modal-actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeAddModal()"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="addJob()"
+      >
+        + Add Job
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     EDIT JOB MODAL
+========================= -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showEditModal && editingJob"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>Edit Job</h2>
+
+        <p>
+          Update the job details below.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeEditModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- JOB TITLE -->
+
+    <div class="form-group">
+
+      <label>
+        Job Title
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="editingJob.title"
+      />
+
+    </div>
+
+
+    <!-- DEPARTMENT -->
+
+    <div class="form-group">
+
+      <label>
+        Department
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="editingJob.department"
+      />
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="form-group">
+
+      <label>
+        Location
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="editingJob.location"
+      />
+
+    </div>
+
+
+    <!-- JOB TYPE -->
+
+    <div class="form-group">
+
+      <label>
+        Job Type
+      </label>
+
+      <select
+        [(ngModel)]="editingJob.type"
+      >
+
+        <option>
+          Full Time
+        </option>
+
+        <option>
+          Part Time
+        </option>
+
+        <option>
+          Contract
+        </option>
+
+        <option>
+          Internship
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="form-group">
+
+      <label>
+        Status
+      </label>
+
+      <select
+        [(ngModel)]="editingJob.status"
+      >
+
+        <option>
+          Open
+        </option>
+
+        <option>
+          Closed
+        </option>
+
+        <option>
+          Draft
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="modal-actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeEditModal()"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="updateJob()"
+      >
+        ✓ Update Job
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,319 @@
+<div class="add-candidate-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <button
+        type="button"
+        class="back-btn"
+        (click)="cancel()"
+      >
+        ← Back to Candidates
+      </button>
+
+      <h1>Add New Candidate</h1>
+
+      <p>
+        Add candidate information to your recruitment pipeline.
+      </p>
+    </div>
+
+  </div>
+
+
+  <form
+    class="candidate-form"
+    (ngSubmit)="saveCandidate()"
+  >
+
+    <!-- PERSONAL INFORMATION -->
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div>
+          <h2>Personal Information</h2>
+          <p>Basic details about the candidate</p>
+        </div>
+
+        <span class="section-icon">👤</span>
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>
+            First Name <span>*</span>
+          </label>
+
+          <input
+            type="text"
+            name="firstName"
+            [(ngModel)]="candidate.firstName"
+            placeholder="Enter first name"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>
+            Last Name <span>*</span>
+          </label>
+
+          <input
+            type="text"
+            name="lastName"
+            [(ngModel)]="candidate.lastName"
+            placeholder="Enter last name"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>
+            Email Address <span>*</span>
+          </label>
+
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="candidate.email"
+            placeholder="candidate@email.com"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Phone Number</label>
+
+          <input
+            type="tel"
+            name="phone"
+            [(ngModel)]="candidate.phone"
+            placeholder="+91 00000 00000"
+          >
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROFESSIONAL INFORMATION -->
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div>
+          <h2>Professional Information</h2>
+          <p>Candidate's current professional details</p>
+        </div>
+
+        <span class="section-icon">💼</span>
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>
+            Position Applied For <span>*</span>
+          </label>
+
+          <input
+            type="text"
+            name="position"
+            [(ngModel)]="candidate.position"
+            placeholder="e.g. Frontend Developer"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Years of Experience</label>
+
+          <select
+            name="experience"
+            [(ngModel)]="candidate.experience"
+          >
+            <option value="">Select experience</option>
+            <option value="0-1 Years">0-1 Years</option>
+            <option value="1-3 Years">1-3 Years</option>
+            <option value="3-5 Years">3-5 Years</option>
+            <option value="5-8 Years">5-8 Years</option>
+            <option value="8+ Years">8+ Years</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label>Location</label>
+
+          <input
+            type="text"
+            name="location"
+            [(ngModel)]="candidate.location"
+            placeholder="e.g. Delhi, India"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Application Status</label>
+
+          <select
+            name="status"
+            [(ngModel)]="candidate.status"
+          >
+         
+  <option value="Applied">Applied</option>
+  <option value="Shortlisted">Shortlisted</option>
+  <option value="Interview">Interview</option>
+  <option value="Selected">Selected</option>
+  <option value="Rejected">Rejected</option>
+</select>
+          
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SKILLS -->
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div>
+          <h2>Skills & Education</h2>
+          <p>Add candidate qualifications and skills</p>
+        </div>
+
+        <span class="section-icon">🎓</span>
+      </div>
+
+
+      <div class="form-grid full-grid">
+
+        <div class="form-group">
+          <label>Skills</label>
+
+          <input
+            type="text"
+            name="skills"
+            [(ngModel)]="candidate.skills"
+            placeholder="e.g. Angular, TypeScript, HTML, CSS"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Education</label>
+
+          <input
+            type="text"
+            name="education"
+            [(ngModel)]="candidate.education"
+            placeholder="e.g. Bachelor of Computer Science"
+          >
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SOCIAL LINKS -->
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div>
+          <h2>Professional Links</h2>
+          <p>Optional candidate profile links</p>
+        </div>
+
+        <span class="section-icon">🔗</span>
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>LinkedIn Profile</label>
+
+          <input
+            type="url"
+            name="linkedin"
+            [(ngModel)]="candidate.linkedin"
+            placeholder="https://linkedin.com/"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Portfolio / Website</label>
+
+          <input
+            type="url"
+            name="portfolio"
+            [(ngModel)]="candidate.portfolio"
+            placeholder="https://portfolio.com/"
+          >
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- NOTES -->
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div>
+          <h2>Additional Notes</h2>
+          <p>Add any important information about this candidate</p>
+        </div>
+
+        <span class="section-icon">📝</span>
+      </div>
+
+
+      <div class="form-group">
+
+        <textarea
+          name="notes"
+          [(ngModel)]="candidate.notes"
+          rows="5"
+          placeholder="Write additional notes here..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        type="submit"
+        class="save-btn"
+      >
+        ✓ Save Candidate
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

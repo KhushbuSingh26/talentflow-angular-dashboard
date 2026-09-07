@@ -1,0 +1,608 @@
+<div class="page-header">
+  <div>
+    <h1>Interviews</h1>
+    <p>Manage and track candidate interviews.</p>
+  </div>
+
+  <button
+    class="add-btn"
+    (click)="openAddModal()"
+  >
+    + Schedule Interview
+  </button>
+</div>
+
+
+<div class="interview-card">
+
+  <div class="table-header">
+
+    <input
+      type="text"
+      placeholder="🔍 Search interviews..."
+      [(ngModel)]="searchTerm"
+    />
+
+    <select [(ngModel)]="selectedStatus">
+      <option>All Status</option>
+      <option>Scheduled</option>
+      <option>Completed</option>
+      <option>Cancelled</option>
+    </select>
+
+  </div>
+
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Position</th>
+          <th>Interviewer</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+
+        <tr
+          *ngFor="let interview of filteredInterviews"
+        >
+
+          <td>
+            <div class="candidate-info">
+
+              <div class="candidate-avatar">
+                {{ interview.candidate.charAt(0) }}
+              </div>
+
+              <strong>
+                {{ interview.candidate }}
+              </strong>
+
+            </div>
+          </td>
+
+
+          <td>
+            {{ interview.position }}
+          </td>
+
+
+          <td>
+            {{ interview.interviewer }}
+          </td>
+
+
+          <td>
+            {{ interview.date }}
+          </td>
+
+
+          <td>
+            {{ interview.time }}
+          </td>
+
+
+          <td>
+            <span class="interview-type">
+              {{ interview.type }}
+            </span>
+          </td>
+
+
+          <td>
+
+            <span
+              class="status"
+              [ngClass]="interview.status.toLowerCase()"
+            >
+              {{ interview.status }}
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <div class="action-buttons">
+
+              <button
+                class="edit-btn"
+                (click)="openEditModal(interview)"
+              >
+                Edit
+              </button>
+
+              <button
+                class="delete-btn"
+                (click)="deleteInterview(interview.id)"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+
+        <tr
+          *ngIf="filteredInterviews.length === 0"
+        >
+
+          <td
+            colspan="8"
+            class="no-data"
+          >
+            No interviews found.
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================= -->
+<!-- Schedule Interview Modal -->
+<!-- ============================= -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>
+          Schedule Interview
+        </h2>
+
+        <p>
+          Enter the interview details below.
+        </p>
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        (click)="closeAddModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+
+    <!-- Candidate -->
+
+    <div class="form-group">
+
+      <label>
+        Candidate Name
+      </label>
+
+
+      <select
+        [(ngModel)]="newInterview.candidate"
+        (ngModelChange)="onCandidateSelected()"
+      >
+
+        <option value="">
+          Select candidate
+        </option>
+
+
+        <option
+          *ngFor="let candidate of candidates"
+          [value]="candidate.name"
+        >
+          {{ candidate.name }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- Position -->
+
+    <div class="form-group">
+
+      <label>
+        Position
+      </label>
+
+
+      <input
+        type="text"
+        placeholder="Job position"
+        [(ngModel)]="newInterview.position"
+        readonly
+      />
+
+    </div>
+
+
+
+    <!-- Interviewer -->
+
+    <div class="form-group">
+
+      <label>
+        Interviewer
+      </label>
+
+
+      <input
+        type="text"
+        placeholder="Enter interviewer name"
+        [(ngModel)]="newInterview.interviewer"
+      />
+
+    </div>
+
+
+
+    <!-- Date -->
+
+    <div class="form-group">
+
+      <label>
+        Interview Date
+      </label>
+
+
+      <input
+        type="date"
+        [(ngModel)]="newInterview.date"
+      />
+
+    </div>
+
+
+
+    <!-- Time -->
+
+    <div class="form-group">
+
+      <label>
+        Interview Time
+      </label>
+
+
+      <input
+        type="time"
+        [(ngModel)]="newInterview.time"
+      />
+
+    </div>
+
+
+
+    <!-- Interview Type -->
+
+    <div class="form-group">
+
+      <label>
+        Interview Type
+      </label>
+
+
+      <select
+        [(ngModel)]="newInterview.type"
+      >
+
+        <option>
+          Video
+        </option>
+
+        <option>
+          In Person
+        </option>
+
+        <option>
+          Phone
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- Status -->
+
+    <div class="form-group">
+
+      <label>
+        Status
+      </label>
+
+
+      <select
+        [(ngModel)]="newInterview.status"
+      >
+
+        <option>
+          Scheduled
+        </option>
+
+        <option>
+          Completed
+        </option>
+
+        <option>
+          Cancelled
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- Actions -->
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel-btn"
+        (click)="closeAddModal()"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        class="save-btn"
+        (click)="addInterview()"
+      >
+        Schedule Interview
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================= -->
+<!-- Edit Interview Modal -->
+<!-- ============================= -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showEditModal && editingInterview"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>
+          Edit Interview
+        </h2>
+
+        <p>
+          Update the interview details below.
+        </p>
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        (click)="closeEditModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+
+    <!-- Candidate -->
+
+    <div class="form-group">
+
+      <label>
+        Candidate Name
+      </label>
+
+
+      <input
+        type="text"
+        [(ngModel)]="editingInterview.candidate"
+      />
+
+    </div>
+
+
+
+    <!-- Position -->
+
+    <div class="form-group">
+
+      <label>
+        Position
+      </label>
+
+
+      <input
+        type="text"
+        [(ngModel)]="editingInterview.position"
+        readonly
+      />
+
+    </div>
+
+
+
+    <!-- Interviewer -->
+
+    <div class="form-group">
+
+      <label>
+        Interviewer
+      </label>
+
+
+      <input
+        type="text"
+        [(ngModel)]="editingInterview.interviewer"
+      />
+
+    </div>
+
+
+
+    <!-- Date -->
+
+    <div class="form-group">
+
+      <label>
+        Interview Date
+      </label>
+
+
+      <input
+        type="date"
+        [(ngModel)]="editingInterview.date"
+      />
+
+    </div>
+
+
+
+    <!-- Time -->
+
+    <div class="form-group">
+
+      <label>
+        Interview Time
+      </label>
+
+
+      <input
+        type="time"
+        [(ngModel)]="editingInterview.time"
+      />
+
+    </div>
+
+
+
+    <!-- Interview Type -->
+
+    <div class="form-group">
+
+      <label>
+        Interview Type
+      </label>
+
+
+      <select
+        [(ngModel)]="editingInterview.type"
+      >
+
+        <option>
+          Video
+        </option>
+
+        <option>
+          In Person
+        </option>
+
+        <option>
+          Phone
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- Status -->
+
+    <div class="form-group">
+
+      <label>
+        Status
+      </label>
+
+
+      <select
+        [(ngModel)]="editingInterview.status"
+      >
+
+        <option>
+          Scheduled
+        </option>
+
+        <option>
+          Completed
+        </option>
+
+        <option>
+          Cancelled
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- Actions -->
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel-btn"
+        (click)="closeEditModal()"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        class="save-btn"
+        (click)="updateInterview()"
+      >
+        Update Interview
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

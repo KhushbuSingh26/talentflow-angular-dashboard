@@ -1,0 +1,160 @@
+<div class="page-header">
+  <div>
+    <h1>Analytics</h1>
+    <p>Track and analyze your recruitment performance.</p>
+  </div>
+
+<select
+  class="date-filter"
+  [(ngModel)]="selectedDateFilter"
+  (change)="onDateFilterChange()"
+>
+    <option>This Month</option>
+    <option>Last Month</option>
+    <option>Last 3 Months</option>
+    <option>This Year</option>
+  </select>
+</div>
+
+<!-- Statistics Cards -->
+<div class="stats-grid">
+
+  <div class="stat-card" *ngFor="let card of analyticsCards">
+    <p class="stat-title">{{ card.title }}</p>
+
+    <h2>{{ card.value }}</h2>
+
+    <div class="stat-bottom">
+      <span class="stat-change">{{ card.change }}</span>
+
+      <span class="stat-description">
+        {{ card.description }}
+      </span>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Top Charts -->
+<div class="analytics-grid">
+
+  <!-- Bar Chart -->
+  <div class="analytics-card recruitment-card">
+
+    <div class="card-header">
+      <div>
+        <h2>Recruitment Overview</h2>
+        <p>Monthly candidate applications</p>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="recruitmentChart"></canvas>
+    </div>
+
+  </div>
+
+
+  <!-- Semi Circle Chart -->
+  <div class="analytics-card hiring-card">
+
+    <div class="card-header">
+      <div>
+        <h2>Hiring Performance</h2>
+        <p>Recruitment success rate</p>
+      </div>
+    </div>
+
+    <div class="hiring-chart-container">
+
+      <div class="hiring-chart-wrapper">
+
+        <canvas id="hiringChart"></canvas>
+
+        <div class="chart-center">
+          <strong>68%</strong>
+          <span>Success Rate</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Bottom Charts -->
+<div class="analytics-grid bottom-grid">
+
+  <!-- Doughnut Chart -->
+  <div class="analytics-card candidate-card">
+
+    <div class="card-header">
+      <div>
+        <h2>Candidate Distribution</h2>
+        <p>Candidate status breakdown</p>
+      </div>
+    </div>
+
+    <div class="candidate-chart-container">
+      <canvas id="candidateChart"></canvas>
+    </div>
+
+  </div>
+
+
+  <!-- Candidate Pipeline -->
+  <div class="analytics-card pipeline-card">
+
+    <div class="card-header">
+      <div>
+        <h2>Candidate Pipeline</h2>
+        <p>Current recruitment progress</p>
+      </div>
+    </div>
+
+    <div class="status-list">
+
+      <div
+        class="status-item"
+        *ngFor="let item of candidateStatus"
+      >
+
+        <div class="status-info">
+
+          <strong>{{ item.status }}</strong>
+
+          <span>
+            {{ item.count }} Candidates
+          </span>
+
+        </div>
+
+
+        <div class="status-progress">
+
+          <div class="progress-background">
+
+            <div
+              class="status-progress-bar"
+              [style.width.%]="item.percentage"
+            ></div>
+
+          </div>
+
+          <span class="percentage">
+            {{ item.percentage }}%
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

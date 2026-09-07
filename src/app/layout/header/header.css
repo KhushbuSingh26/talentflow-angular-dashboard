@@ -1,0 +1,367 @@
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  width: 100%;
+  height: 90px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 35px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER LEFT
+========================= */
+
+.header-left {
+  min-width: 0;
+  flex: 1;
+}
+
+.header h2 {
+  margin: 0;
+
+  font-size: 24px;
+  line-height: 1.2;
+
+  color: #111827;
+
+  white-space: nowrap;
+}
+
+.header p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   HEADER RIGHT
+========================= */
+
+.header-right {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  flex-shrink: 0;
+}
+
+/* =========================
+   ICON BUTTON
+========================= */
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  border: 1px solid #e5e7eb;
+
+  background: #ffffff;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+.icon-btn:hover {
+  background: #f9fafb;
+}
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification-btn {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  background: #ef4444;
+
+  border-radius: 50%;
+
+  top: 8px;
+  right: 8px;
+}
+
+/* =========================
+   HEADER PROFILE
+========================= */
+
+.header-profile {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-left: 5px;
+
+  flex-shrink: 0;
+}
+
+.header-avatar {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+
+  border-radius: 50%;
+
+  background: #6366f1;
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.profile-info strong {
+  font-size: 14px;
+
+  color: #111827;
+
+  white-space: nowrap;
+}
+
+.profile-info span {
+  font-size: 12px;
+
+  color: #6b7280;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+  .header {
+    height: 80px;
+
+    padding: 0 25px;
+  }
+
+  .header h2 {
+    font-size: 22px;
+  }
+
+  .header p {
+    font-size: 13px;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .header {
+    height: 76px;
+
+    padding: 0 18px;
+
+    overflow: hidden;
+  }
+
+  .header-left {
+    min-width: 0;
+
+    overflow: hidden;
+  }
+
+  .header h2 {
+    font-size: 20px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header p {
+    font-size: 12px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    max-width: 100%;
+  }
+
+  .header-right {
+    gap: 8px;
+
+    margin-left: 12px;
+  }
+
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    font-size: 15px;
+  }
+
+  .header-profile {
+    margin-left: 2px;
+  }
+
+  .header-avatar {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    font-size: 12px;
+  }
+
+  .profile-info {
+    display: none;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .header {
+    height: 70px;
+
+    padding: 0 12px;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+
+  .header p {
+    font-size: 11px;
+
+    margin-top: 3px;
+  }
+
+  .header-right {
+    gap: 6px;
+
+    margin-left: 8px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    font-size: 14px;
+
+    border-radius: 8px;
+  }
+
+  .header-avatar {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    font-size: 11px;
+  }
+
+  .notification-dot {
+    width: 7px;
+    height: 7px;
+
+    top: 6px;
+    right: 6px;
+  }
+}
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 360px) {
+  .header {
+    padding: 0 8px;
+  }
+
+  .header h2 {
+    font-size: 17px;
+  }
+
+  .header p {
+    display: none;
+  }
+
+  .header-right {
+    gap: 5px;
+
+    margin-left: 6px;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+  }
+
+  .header-avatar {
+    width: 32px;
+    height: 32px;
+
+    min-width: 32px;
+  }
+}

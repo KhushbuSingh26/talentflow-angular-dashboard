@@ -1,0 +1,569 @@
+<div class="dashboard-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div class="welcome-content">
+      <h1>Welcome back, Khushbu 👋</h1>
+      <p>Here's a quick overview of your recruitment activity.</p>
+    </div>
+
+    <div class="header-actions">
+
+      <button type="button" class="header-btn notification-btn">
+        🔔
+        <span class="notification-count">3</span>
+      </button>
+
+      <button
+        type="button"
+        class="primary-btn"
+        (click)="addCandidate()"
+      >
+        <span>＋</span>
+        Add Candidate
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- QUICK ACTIONS -->
+  <div class="quick-actions-section">
+
+    <div class="section-heading">
+      <div>
+        <h2>Quick Actions</h2>
+        <p>Manage your recruitment workflow faster</p>
+      </div>
+    </div>
+
+    <div class="quick-actions-grid">
+
+      <button
+        type="button"
+        class="quick-action action-orange"
+        (click)="addCandidate()"
+      >
+        <span class="quick-icon">👤</span>
+
+        <div>
+          <strong>Add Candidate</strong>
+          <small>Add a new candidate</small>
+        </div>
+
+        <span class="arrow">→</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="quick-action action-purple"
+        (click)="viewJobs()"
+      >
+        <span class="quick-icon">💼</span>
+
+        <div>
+          <strong>Post a Job</strong>
+          <small>Create a job opening</small>
+        </div>
+
+        <span class="arrow">→</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="quick-action action-blue"
+        (click)="viewInterviews()"
+      >
+        <span class="quick-icon">📅</span>
+
+        <div>
+          <strong>Schedule Interview</strong>
+          <small>Plan a candidate interview</small>
+        </div>
+
+        <span class="arrow">→</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="quick-action action-green"
+        (click)="viewAnalytics()"
+      >
+        <span class="quick-icon">📊</span>
+
+        <div>
+          <strong>View Analytics</strong>
+          <small>Check recruitment insights</small>
+        </div>
+
+        <span class="arrow">→</span>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- STATISTICS -->
+  <div class="stats-grid">
+
+    <div
+      class="stat-card"
+      *ngFor="let stat of stats; let i = index"
+      [ngClass]="'stat-card-' + i"
+    >
+
+      <div class="stat-top">
+
+        <span class="stat-title">
+          {{ stat.title }}
+        </span>
+
+        <span class="stat-icon">
+          {{ stat.icon }}
+        </span>
+
+      </div>
+
+      <h2>{{ stat.value }}</h2>
+
+    </div>
+
+  </div>
+
+
+  <!-- TRAFFIC STATS -->
+  <div class="traffic-stats">
+
+    <div
+      class="traffic-stat-card"
+      *ngFor="let traffic of trafficStats"
+    >
+
+      <span>{{ traffic.title }}</span>
+
+      <div class="traffic-value">
+
+        <h3>{{ traffic.value }}</h3>
+
+        <small>
+          ↑ {{ traffic.change }}
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- WEEKLY RECRUITMENT -->
+  <div class="dashboard-card chart-card weekly-recruitment-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Weekly Recruitment Activity</h2>
+        <p>Track applications and interviews throughout the week</p>
+      </div>
+
+      <span class="card-tag orange-tag">
+        This Week
+      </span>
+
+    </div>
+
+    <div class="weekly-recruitment-chart-container">
+      <canvas id="weeklyRecruitmentChart"></canvas>
+    </div>
+
+  </div>
+
+
+  <!-- WEEKLY TRAFFIC -->
+  <div class="dashboard-card chart-card weekly-traffic-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Weekly Traffic</h2>
+        <p>Compare profile views and job views this week</p>
+      </div>
+
+      <span class="card-tag blue-tag">
+        This Week
+      </span>
+
+    </div>
+
+    <div class="traffic-chart-container">
+      <canvas id="trafficChart"></canvas>
+    </div>
+
+  </div>
+
+
+  <!-- RECRUITMENT CHARTS -->
+  <div class="charts-grid">
+
+    <div class="dashboard-card chart-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Recruitment Overview</h2>
+          <p>Applications and interviews over the last 6 months</p>
+        </div>
+
+        <span class="card-tag orange-tag">
+          Last 6 Months
+        </span>
+
+      </div>
+
+      <div class="chart-container">
+        <canvas id="recruitmentChart"></canvas>
+      </div>
+
+    </div>
+
+
+    <!-- CANDIDATE PIPELINE -->
+    <div class="dashboard-card chart-card candidate-pipeline-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Candidate Pipeline</h2>
+          <p>Current recruitment distribution</p>
+        </div>
+
+        <span class="card-tag purple-tag">
+          {{ stats[0].value }} Total
+        </span>
+
+      </div>
+
+      <div class="pipeline-chart-container">
+        <canvas id="pipelineChart"></canvas>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOP PERFORMING JOBS -->
+  <div class="dashboard-card top-jobs-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Top Performing Jobs 🔥</h2>
+        <p>Jobs receiving the highest candidate engagement</p>
+      </div>
+
+      <button
+        type="button"
+        class="view-btn"
+        (click)="viewJobs()"
+      >
+        View All Jobs
+      </button>
+
+    </div>
+
+
+    <div
+      class="top-jobs-grid"
+      *ngIf="topJobs.length > 0"
+    >
+
+      <div
+        class="top-job-item"
+        *ngFor="let job of topJobs; let i = index"
+      >
+
+        <div
+          class="job-rank"
+          [ngClass]="{
+            'rank-one': i === 0,
+            'rank-two': i === 1,
+            'rank-three': i === 2
+          }"
+        >
+          {{ (i + 1).toString().padStart(2, '0') }}
+        </div>
+
+
+        <div class="top-job-info">
+
+          <strong>{{ job.title }}</strong>
+
+          <span>
+            {{ job.department }} Department
+          </span>
+
+        </div>
+
+
+        <div class="job-stat">
+
+          <strong>{{ job.applicants }}</strong>
+
+          <span>Applicants</span>
+
+        </div>
+
+
+        <div class="job-progress">
+
+          <div class="mini-progress">
+
+            <span
+              [style.width.%]="job.engagement"
+            ></span>
+
+          </div>
+
+          <small>
+            {{ job.engagement }}% engagement
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="empty-state"
+      *ngIf="topJobs.length === 0"
+    >
+      No jobs available yet.
+    </div>
+
+  </div>
+
+
+  <!-- HIRING PIPELINE -->
+  <div class="dashboard-card pipeline-overview">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Hiring Pipeline Overview</h2>
+        <p>Track candidates across each recruitment stage</p>
+      </div>
+
+      <span class="card-tag orange-tag">
+        Updated Today
+      </span>
+
+    </div>
+
+
+    <div class="pipeline-list">
+
+      <div
+        class="pipeline-item"
+        *ngFor="let item of pipeline"
+      >
+
+        <div class="pipeline-info">
+
+          <div>
+
+            <strong>{{ item.title }}</strong>
+
+            <span>
+              {{ item.count }} candidates
+            </span>
+
+          </div>
+
+          <strong>
+            {{ item.percentage }}%
+          </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="item.percentage"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RECENT CANDIDATES AND JOBS -->
+  <div class="dashboard-grid">
+
+
+    <!-- RECENT CANDIDATES -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Recent Candidates</h2>
+          <p>Latest candidate applications</p>
+        </div>
+
+        <button
+          type="button"
+          class="view-btn"
+          (click)="viewCandidates()"
+        >
+          View All
+        </button>
+
+      </div>
+
+
+      <div
+        class="candidate-list"
+        *ngIf="recentCandidates.length > 0"
+      >
+
+        <div
+          class="candidate-item"
+          *ngFor="let candidate of recentCandidates"
+        >
+
+          <div class="candidate-avatar">
+            {{ candidate.name.charAt(0) }}
+          </div>
+
+
+          <div class="candidate-details">
+
+            <strong>
+              {{ candidate.name }}
+            </strong>
+
+            <span>
+              {{ candidate.position }}
+            </span>
+
+          </div>
+
+
+          <span
+            class="status"
+            [ngClass]="candidate.status.toLowerCase()"
+          >
+            {{ candidate.status }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="empty-state"
+        *ngIf="recentCandidates.length === 0"
+      >
+        No candidates added yet.
+      </div>
+
+    </div>
+
+
+    <!-- RECENT JOBS -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Recent Jobs</h2>
+          <p>Recently created job openings</p>
+        </div>
+
+        <button
+          type="button"
+          class="view-btn"
+          (click)="viewJobs()"
+        >
+          View All
+        </button>
+
+      </div>
+
+
+      <div
+        class="job-list"
+        *ngIf="recentJobs.length > 0"
+      >
+
+        <div
+          class="job-item"
+          *ngFor="let job of recentJobs"
+        >
+
+          <div class="job-icon">
+            💼
+          </div>
+
+
+          <div class="job-details">
+
+            <strong>
+              {{ job.title }}
+            </strong>
+
+            <span>
+              {{ job.department }}
+            </span>
+
+          </div>
+
+
+          <div class="job-meta">
+
+            <span>
+              {{ job.applicants }} applicants
+            </span>
+
+            <span
+              class="status"
+              [ngClass]="job.status.toLowerCase()"
+            >
+              {{ job.status }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="empty-state"
+        *ngIf="recentJobs.length === 0"
+      >
+        No jobs created yet.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
