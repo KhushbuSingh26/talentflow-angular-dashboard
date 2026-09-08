@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,7 +21,7 @@ export interface CandidateData {
 export class CandidateService {
 
   private apiUrl =
-    'http://localhost:3000/candidates';
+    'https://talentflow-api-zkmy.onrender.com/candidates';
 
   constructor(
     private http: HttpClient

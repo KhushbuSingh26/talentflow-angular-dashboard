@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -17,7 +18,7 @@ export interface InterviewData {
   providedIn: 'root',
 })
 export class InterviewService {
-  private apiUrl = 'http://localhost:3000/interviews';
+  private apiUrl = 'https://talentflow-api-zkmy.onrender.com/interviews';
 
   constructor(private http: HttpClient) {}
 
