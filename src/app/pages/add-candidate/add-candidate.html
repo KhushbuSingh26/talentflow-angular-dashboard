@@ -3,7 +3,8 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
 
-    <div>
+    <div class="page-header-content">
+
       <button
         type="button"
         class="back-btn"
@@ -17,8 +18,115 @@
       <p>
         Add candidate information to your recruitment pipeline.
       </p>
+
     </div>
 
+
+    <!-- RESUME UPLOAD -->
+    <div class="resume-upload-card">
+
+      <div class="resume-upload-icon">
+        📄
+      </div>
+
+      <div class="resume-upload-content">
+
+        <div class="resume-upload-title">
+          Upload Resume
+        </div>
+
+        <div class="resume-upload-subtitle">
+          Auto-fill candidate details
+        </div>
+
+        <label
+          class="resume-upload-btn"
+          [class.disabled]="isParsingResume"
+        >
+
+          <span *ngIf="!isParsingResume">
+            Choose Resume
+          </span>
+
+          <span *ngIf="isParsingResume">
+            Reading Resume...
+          </span>
+
+          <input
+            type="file"
+            accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            (change)="onResumeSelected($event)"
+            [disabled]="isParsingResume"
+            hidden
+          >
+
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RESUME STATUS -->
+  <div
+    class="resume-status success"
+    *ngIf="resumeParsedSuccessfully"
+  >
+    <span>✓</span>
+
+    <div>
+      <strong>Resume parsed successfully</strong>
+
+      <small>
+        Candidate information has been filled automatically.
+      </small>
+    </div>
+  </div>
+
+
+  <div
+    class="resume-status loading"
+    *ngIf="isParsingResume"
+  >
+    <span class="loading-spinner"></span>
+
+    <div>
+      <strong>Reading resume...</strong>
+
+      <small>
+        Extracting candidate information. Please wait.
+      </small>
+    </div>
+  </div>
+
+
+  <div
+    class="resume-status error"
+    *ngIf="resumeParseError"
+  >
+    <span>!</span>
+
+    <div>
+      <strong>Resume could not be processed</strong>
+
+      <small>
+        {{ resumeParseError }}
+      </small>
+    </div>
+  </div>
+
+
+  <div
+    class="resume-file-name"
+    *ngIf="resumeFileName && !isParsingResume"
+  >
+    <span>📎</span>
+
+    <span>
+      {{ resumeFileName }}
+    </span>
   </div>
 
 
@@ -31,18 +139,26 @@
     <div class="form-card">
 
       <div class="form-card-header">
+
         <div>
           <h2>Personal Information</h2>
-          <p>Basic details about the candidate</p>
+
+          <p>
+            Basic details about the candidate
+          </p>
         </div>
 
-        <span class="section-icon">👤</span>
+        <span class="section-icon">
+          👤
+        </span>
+
       </div>
 
 
       <div class="form-grid">
 
         <div class="form-group">
+
           <label>
             First Name <span>*</span>
           </label>
@@ -53,10 +169,12 @@
             [(ngModel)]="candidate.firstName"
             placeholder="Enter first name"
           >
+
         </div>
 
 
         <div class="form-group">
+
           <label>
             Last Name <span>*</span>
           </label>
@@ -67,10 +185,12 @@
             [(ngModel)]="candidate.lastName"
             placeholder="Enter last name"
           >
+
         </div>
 
 
         <div class="form-group">
+
           <label>
             Email Address <span>*</span>
           </label>
@@ -81,11 +201,15 @@
             [(ngModel)]="candidate.email"
             placeholder="candidate@email.com"
           >
+
         </div>
 
 
         <div class="form-group">
-          <label>Phone Number</label>
+
+          <label>
+            Phone Number
+          </label>
 
           <input
             type="tel"
@@ -93,6 +217,7 @@
             [(ngModel)]="candidate.phone"
             placeholder="+91 00000 00000"
           >
+
         </div>
 
       </div>
@@ -104,18 +229,26 @@
     <div class="form-card">
 
       <div class="form-card-header">
+
         <div>
           <h2>Professional Information</h2>
-          <p>Candidate's current professional details</p>
+
+          <p>
+            Candidate's current professional details
+          </p>
         </div>
 
-        <span class="section-icon">💼</span>
+        <span class="section-icon">
+          💼
+        </span>
+
       </div>
 
 
       <div class="form-grid">
 
         <div class="form-group">
+
           <label>
             Position Applied For <span>*</span>
           </label>
@@ -126,28 +259,55 @@
             [(ngModel)]="candidate.position"
             placeholder="e.g. Frontend Developer"
           >
+
         </div>
 
 
         <div class="form-group">
-          <label>Years of Experience</label>
+
+          <label>
+            Years of Experience
+          </label>
 
           <select
             name="experience"
             [(ngModel)]="candidate.experience"
           >
-            <option value="">Select experience</option>
-            <option value="0-1 Years">0-1 Years</option>
-            <option value="1-3 Years">1-3 Years</option>
-            <option value="3-5 Years">3-5 Years</option>
-            <option value="5-8 Years">5-8 Years</option>
-            <option value="8+ Years">8+ Years</option>
+
+            <option value="">
+              Select experience
+            </option>
+
+            <option value="0-1 Years">
+              0-1 Years
+            </option>
+
+            <option value="1-3 Years">
+              1-3 Years
+            </option>
+
+            <option value="3-5 Years">
+              3-5 Years
+            </option>
+
+            <option value="5-8 Years">
+              5-8 Years
+            </option>
+
+            <option value="8+ Years">
+              8+ Years
+            </option>
+
           </select>
+
         </div>
 
 
         <div class="form-group">
-          <label>Location</label>
+
+          <label>
+            Location
+          </label>
 
           <input
             type="text"
@@ -155,24 +315,43 @@
             [(ngModel)]="candidate.location"
             placeholder="e.g. Delhi, India"
           >
+
         </div>
 
 
         <div class="form-group">
-          <label>Application Status</label>
+
+          <label>
+            Application Status
+          </label>
 
           <select
             name="status"
             [(ngModel)]="candidate.status"
           >
-         
-  <option value="Applied">Applied</option>
-  <option value="Shortlisted">Shortlisted</option>
-  <option value="Interview">Interview</option>
-  <option value="Selected">Selected</option>
-  <option value="Rejected">Rejected</option>
-</select>
-          
+
+            <option value="Applied">
+              Applied
+            </option>
+
+            <option value="Shortlisted">
+              Shortlisted
+            </option>
+
+            <option value="Interview">
+              Interview
+            </option>
+
+            <option value="Selected">
+              Selected
+            </option>
+
+            <option value="Rejected">
+              Rejected
+            </option>
+
+          </select>
+
         </div>
 
       </div>
@@ -180,23 +359,33 @@
     </div>
 
 
-    <!-- SKILLS -->
+    <!-- SKILLS & EDUCATION -->
     <div class="form-card">
 
       <div class="form-card-header">
+
         <div>
           <h2>Skills & Education</h2>
-          <p>Add candidate qualifications and skills</p>
+
+          <p>
+            Add candidate qualifications and skills
+          </p>
         </div>
 
-        <span class="section-icon">🎓</span>
+        <span class="section-icon">
+          🎓
+        </span>
+
       </div>
 
 
       <div class="form-grid full-grid">
 
         <div class="form-group">
-          <label>Skills</label>
+
+          <label>
+            Skills
+          </label>
 
           <input
             type="text"
@@ -204,11 +393,15 @@
             [(ngModel)]="candidate.skills"
             placeholder="e.g. Angular, TypeScript, HTML, CSS"
           >
+
         </div>
 
 
         <div class="form-group">
-          <label>Education</label>
+
+          <label>
+            Education
+          </label>
 
           <input
             type="text"
@@ -216,6 +409,7 @@
             [(ngModel)]="candidate.education"
             placeholder="e.g. Bachelor of Computer Science"
           >
+
         </div>
 
       </div>
@@ -227,19 +421,29 @@
     <div class="form-card">
 
       <div class="form-card-header">
+
         <div>
           <h2>Professional Links</h2>
-          <p>Optional candidate profile links</p>
+
+          <p>
+            Optional candidate profile links
+          </p>
         </div>
 
-        <span class="section-icon">🔗</span>
+        <span class="section-icon">
+          🔗
+        </span>
+
       </div>
 
 
       <div class="form-grid">
 
         <div class="form-group">
-          <label>LinkedIn Profile</label>
+
+          <label>
+            LinkedIn Profile
+          </label>
 
           <input
             type="url"
@@ -247,11 +451,15 @@
             [(ngModel)]="candidate.linkedin"
             placeholder="https://linkedin.com/"
           >
+
         </div>
 
 
         <div class="form-group">
-          <label>Portfolio / Website</label>
+
+          <label>
+            Portfolio / Website
+          </label>
 
           <input
             type="url"
@@ -259,6 +467,7 @@
             [(ngModel)]="candidate.portfolio"
             placeholder="https://portfolio.com/"
           >
+
         </div>
 
       </div>
@@ -270,12 +479,19 @@
     <div class="form-card">
 
       <div class="form-card-header">
+
         <div>
           <h2>Additional Notes</h2>
-          <p>Add any important information about this candidate</p>
+
+          <p>
+            Add any important information about this candidate
+          </p>
         </div>
 
-        <span class="section-icon">📝</span>
+        <span class="section-icon">
+          📝
+        </span>
+
       </div>
 
 
@@ -308,8 +524,17 @@
       <button
         type="submit"
         class="save-btn"
+        [disabled]="isSaving || isParsingResume"
       >
-        ✓ Save Candidate
+
+        <span *ngIf="!isSaving">
+          ✓ Save Candidate
+        </span>
+
+        <span *ngIf="isSaving">
+          Saving Candidate...
+        </span>
+
       </button>
 
     </div>

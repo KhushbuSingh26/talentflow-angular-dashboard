@@ -15,7 +15,16 @@
 ========================= */
 
 .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
   margin-bottom: 28px;
+}
+
+.page-header-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .back-btn {
@@ -36,6 +45,8 @@
 .page-header h1 {
   margin: 0 0 7px;
   font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
   color: #1e293b;
 }
 
@@ -43,6 +54,285 @@
   margin: 0;
   font-size: 14px;
   color: #64748b;
+}
+
+
+/* =========================
+   RESUME UPLOAD CARD
+========================= */
+
+.resume-upload-card {
+  width: 300px;
+  min-width: 300px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 15px 16px;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f8f7ff 100%
+  );
+
+  border: 1px solid #ddd9ff;
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 24px rgba(99, 102, 241, 0.08);
+
+  transition: all 0.25s ease;
+    margin-right: 32px;
+
+}
+
+.resume-upload-card:hover {
+  border-color: #c7c3ff;
+  box-shadow:
+    0 10px 28px rgba(99, 102, 241, 0.12);
+  transform: translateY(-1px);
+}
+
+
+/* Resume Icon */
+
+.resume-upload-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: linear-gradient(
+    135deg,
+    #ede9fe,
+    #e0e7ff
+  );
+
+  color: #6366f1;
+  font-size: 20px;
+
+  box-sizing: border-box;
+}
+
+
+/* Resume Content */
+
+.resume-upload-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.resume-upload-title {
+  margin-bottom: 2px;
+
+  color: #1e293b;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.resume-upload-subtitle {
+  margin-bottom: 8px;
+
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+
+/* Choose Resume Button */
+
+.resume-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 30px;
+
+  padding: 6px 11px;
+
+  border-radius: 7px;
+
+  background: #6366f1;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.resume-upload-btn:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(99, 102, 241, 0.22);
+}
+
+.resume-upload-btn.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+
+/* =========================
+   RESUME STATUS
+========================= */
+
+.resume-status {
+  max-width: 1100px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 15px;
+
+  margin: -8px 0 18px;
+
+  border-radius: 10px;
+
+  box-sizing: border-box;
+}
+
+.resume-status > span:first-child {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.resume-status div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.resume-status strong {
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.resume-status small {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+
+/* Success */
+
+.resume-status.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.resume-status.success > span:first-child {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+
+/* Loading */
+
+.resume-status.loading {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.resume-status.loading > span:first-child {
+  background: #dbeafe;
+}
+
+
+/* Error */
+
+.resume-status.error {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #9a3412;
+}
+
+.resume-status.error > span:first-child {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+
+/* =========================
+   LOADING SPINNER
+========================= */
+
+.loading-spinner {
+  border: 3px solid #bfdbfe;
+  border-top-color: #2563eb;
+
+  animation: resumeSpinner 0.8s linear infinite;
+}
+
+@keyframes resumeSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================
+   SELECTED RESUME FILE
+========================= */
+
+.resume-file-name {
+  max-width: 1100px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 12px;
+
+  margin: -8px 0 18px;
+
+  background: #f8f7ff;
+
+  border: 1px solid #e4e1ff;
+  border-radius: 8px;
+
+  color: #4f46e5;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+}
+
+.resume-file-name span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
@@ -60,6 +350,8 @@
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 20px;
+
+  box-sizing: border-box;
 }
 
 
@@ -71,19 +363,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding-bottom: 20px;
   margin-bottom: 22px;
+
   border-bottom: 1px solid #edf1f7;
 }
 
 .form-card-header h2 {
   margin: 0 0 5px;
+
   font-size: 18px;
+  font-weight: 700;
+
   color: #1e293b;
 }
 
 .form-card-header p {
   margin: 0;
+
   color: #64748b;
   font-size: 13px;
 }
@@ -91,11 +389,15 @@
 .section-icon {
   width: 42px;
   height: 42px;
+
   border-radius: 12px;
+
   background: #eff6ff;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 20px;
 }
 
@@ -126,7 +428,9 @@
 
 .form-group label {
   margin-bottom: 8px;
+
   color: #334155;
+
   font-size: 13px;
   font-weight: 600;
 }
@@ -145,13 +449,20 @@
 .form-group textarea {
   width: 100%;
   box-sizing: border-box;
+
   border: 1px solid #dbe2ea;
+
   background: #ffffff;
+
   border-radius: 9px;
+
   padding: 12px 14px;
+
   font-size: 14px;
   color: #1e293b;
+
   outline: none;
+
   transition: 0.2s ease;
 }
 
@@ -168,8 +479,10 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: #6366f1;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.10);
 }
 
 
@@ -181,23 +494,29 @@
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+
   padding: 10px 0 30px;
 }
 
 .cancel-btn,
 .save-btn {
-  border: none;
   border-radius: 9px;
+
   padding: 12px 20px;
+
   font-size: 14px;
   font-weight: 600;
+
   cursor: pointer;
+
   transition: 0.25s ease;
 }
 
 .cancel-btn {
   background: #ffffff;
+
   border: 1px solid #dbe2ea;
+
   color: #475569;
 }
 
@@ -206,20 +525,49 @@
 }
 
 .save-btn {
-  background: #2563eb;
+  border: none;
+
+  background: #6366f1;
+
   color: #ffffff;
 }
 
 .save-btn:hover {
-  background: #1d4ed8;
+  background: #4f46e5;
+
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+
+  box-shadow:
+    0 8px 18px rgba(99, 102, 241, 0.22);
+}
+
+.save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 
 /* =========================
    RESPONSIVE
 ========================= */
+
+@media (max-width: 900px) {
+
+  .page-header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .resume-upload-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 420px;
+  }
+
+}
+
 
 @media (max-width: 768px) {
 
@@ -231,7 +579,12 @@
     grid-template-columns: 1fr;
   }
 
+  .resume-upload-card {
+    max-width: none;
+  }
+
 }
+
 
 @media (max-width: 480px) {
 
@@ -239,12 +592,23 @@
     padding: 15px;
   }
 
+  .page-header h1 {
+    font-size: 25px;
+  }
+
   .form-card {
     padding: 18px;
   }
 
-  .page-header h1 {
-    font-size: 25px;
+  .resume-upload-card {
+    padding: 13px;
+  }
+
+  .resume-upload-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    font-size: 18px;
   }
 
   .form-actions {
@@ -254,6 +618,5 @@
   .cancel-btn,
   .save-btn {
     width: 100%;
-  }
 
 }

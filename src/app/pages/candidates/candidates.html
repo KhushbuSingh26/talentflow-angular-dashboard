@@ -11,7 +11,6 @@
       </p>
     </div>
 
-    <!-- OPEN ADD CANDIDATE MODAL -->
     <button
       type="button"
       class="save-btn"
@@ -40,7 +39,6 @@
       />
 
     </div>
-
 
     <select
       class="status-filter"
@@ -95,7 +93,6 @@
           </tr>
 
         </thead>
-
 
         <tbody>
 
@@ -283,7 +280,7 @@
           </h2>
 
           <p>
-            Add a new candidate to a job
+            Upload a resume or enter candidate details manually
           </p>
 
         </div>
@@ -303,7 +300,146 @@
 
       <div class="modal-body">
 
-        <!-- NAME -->
+
+        <!-- ======================================
+             RESUME UPLOAD
+        ======================================= -->
+
+        <div class="resume-upload-section">
+
+          <!--
+          Extra heading intentionally hidden.
+          -->
+
+          <div class="resume-upload-header">
+
+            <div>
+
+              <label class="resume-upload-title">
+                Upload Resume
+              </label>
+
+              <p class="resume-upload-description">
+                Upload a PDF or DOCX resume to automatically fill candidate details.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- RESUME UPLOAD BOX -->
+
+          <div
+            class="resume-upload-box"
+            [class.resume-uploading]="isParsingResume"
+          >
+
+            <input
+              #resumeInput
+              type="file"
+              accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              (change)="onResumeSelected($event)"
+              hidden
+            />
+
+
+            <!-- ICON -->
+
+            <div class="resume-upload-icon">
+              📄
+            </div>
+
+
+            <!-- TEXT -->
+
+            <div class="resume-upload-content">
+
+              <strong
+                *ngIf="
+                  !resumeFileName &&
+                  !isParsingResume
+                "
+              >
+                Upload candidate resume
+              </strong>
+
+              <strong
+                *ngIf="
+                  resumeFileName &&
+                  !isParsingResume
+                "
+              >
+                {{ resumeFileName }}
+              </strong>
+
+              <strong
+                *ngIf="isParsingResume"
+              >
+                Reading resume...
+              </strong>
+
+
+              <span
+                *ngIf="!isParsingResume"
+              >
+                PDF or DOCX · Maximum 10 MB
+              </span>
+
+              <span
+                *ngIf="isParsingResume"
+              >
+                Extracting candidate information automatically
+              </span>
+
+            </div>
+
+
+            <!-- CHOOSE RESUME -->
+
+            <button
+              type="button"
+              class="resume-upload-btn"
+              (click)="resumeInput.click()"
+              [disabled]="isParsingResume"
+            >
+
+              {{
+                isParsingResume
+                  ? 'Processing...'
+                  : 'Choose Resume'
+              }}
+
+            </button>
+
+          </div>
+
+
+          <!-- SUCCESS -->
+
+          <div
+            class="resume-success-message"
+            *ngIf="resumeParsedSuccessfully"
+          >
+            ✓ Resume information extracted successfully. Please review the details below.
+          </div>
+
+
+          <!-- ERROR -->
+
+          <div
+            class="resume-error-message"
+            *ngIf="resumeParseError"
+          >
+            {{ resumeParseError }}
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             NAME
+        ======================================= -->
 
         <div class="form-group">
 
@@ -320,7 +456,9 @@
         </div>
 
 
-        <!-- EMAIL -->
+        <!-- ======================================
+             EMAIL
+        ======================================= -->
 
         <div class="form-group">
 
@@ -337,7 +475,47 @@
         </div>
 
 
-        <!-- JOB -->
+        <!-- ======================================
+             PHONE
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label>
+            Phone
+          </label>
+
+          <input
+            type="tel"
+            placeholder="Enter candidate phone"
+            [(ngModel)]="newCandidate.phone"
+          />
+
+        </div>
+
+
+        <!-- ======================================
+             EXPERIENCE
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label>
+            Experience
+          </label>
+
+          <input
+            type="text"
+            placeholder="e.g. 2 years"
+            [(ngModel)]="newCandidate.experience"
+          />
+
+        </div>
+
+
+        <!-- ======================================
+             JOB
+        ======================================= -->
 
         <div class="form-group">
 
@@ -350,7 +528,7 @@
             (change)="onJobSelected()"
           >
 
-            <option value="">
+            <option [ngValue]="null">
               Select a job
             </option>
 
@@ -366,7 +544,9 @@
         </div>
 
 
-        <!-- STATUS -->
+        <!-- ======================================
+             STATUS
+        ======================================= -->
 
         <div class="form-group">
 
@@ -417,14 +597,14 @@
           Cancel
         </button>
 
-
-        <!-- ACTUAL ADD CANDIDATE BUTTON -->
-
         <button
           type="button"
           class="save-btn"
           (click)="addCandidate()"
-          [disabled]="isAddingCandidate"
+          [disabled]="
+            isAddingCandidate ||
+            isParsingResume
+          "
         >
 
           {{
@@ -525,6 +705,40 @@
         </div>
 
 
+        <!-- PHONE -->
+
+        <div class="form-group">
+
+          <label>
+            Phone
+          </label>
+
+          <input
+            type="tel"
+            placeholder="Enter candidate phone"
+            [(ngModel)]="editingCandidate.phone"
+          />
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="form-group">
+
+          <label>
+            Experience
+          </label>
+
+          <input
+            type="text"
+            placeholder="e.g. 2 years"
+            [(ngModel)]="editingCandidate.experience"
+          />
+
+        </div>
+
+
         <!-- JOB -->
 
         <div class="form-group">
@@ -538,7 +752,7 @@
             (change)="onEditJobSelected()"
           >
 
-            <option value="">
+            <option [ngValue]="null">
               Select a job
             </option>
 

@@ -1,6 +1,6 @@
-/* =========================
+/* =========================================================
    CANDIDATES PAGE
-========================= */
+   ========================================================= */
 
 .candidates-page {
   width: 100%;
@@ -11,9 +11,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    PAGE HEADER
-========================= */
+   ========================================================= */
 
 .page-header {
   display: flex;
@@ -41,17 +41,13 @@
 }
 
 
-/* =========================
-   THEME - PAGE HEADING
-========================= */
-
-/* Light theme */
+/* =========================================================
+   THEME
+   ========================================================= */
 
 :host-context(.light-theme) .page-header h1 {
   color: #111827;
 }
-
-/* Dark theme */
 
 :host-context(.dark-theme) .page-header h1 {
   color: #ffffff;
@@ -62,9 +58,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    ADD CANDIDATE BUTTON
-========================= */
+   ========================================================= */
 
 .save-btn {
   display: inline-flex;
@@ -95,7 +91,10 @@
   box-shadow:
     0 6px 18px rgba(99, 102, 241, 0.25);
 
-  transition: all 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .save-btn:hover {
@@ -119,15 +118,17 @@
 }
 
 
-/* =========================
+/* =========================================================
    FILTERS
-========================= */
+   ========================================================= */
 
 .filters {
   display: flex;
   align-items: center;
   gap: 14px;
+
   margin-bottom: 20px;
+
   width: 100%;
   box-sizing: border-box;
 }
@@ -135,12 +136,14 @@
 .search-box {
   position: relative;
   flex: 1;
+
   max-width: 480px;
   min-width: 0;
 }
 
 .search-icon {
   position: absolute;
+
   left: 13px;
   top: 50%;
 
@@ -223,9 +226,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    TABLE CARD
-========================= */
+   ========================================================= */
 
 .table-card {
   width: 100%;
@@ -255,9 +258,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    TABLE
-========================= */
+   ========================================================= */
 
 table {
   width: 100%;
@@ -320,9 +323,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    CANDIDATE INFO
-========================= */
+   ========================================================= */
 
 .candidate-info {
   display: flex;
@@ -373,9 +376,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    POSITION
-========================= */
+   ========================================================= */
 
 .position-text {
   color: #374151;
@@ -385,9 +388,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    STATUS BADGES
-========================= */
+   ========================================================= */
 
 .status-badge {
   display: inline-flex;
@@ -404,40 +407,25 @@ tbody tr:last-child td {
   white-space: nowrap;
 }
 
-
-/* Applied */
-
 .status-applied {
   background: #f1f5f9;
   color: #475569;
 }
-
-
-/* Screening */
 
 .status-screening {
   background: #fef3c7;
   color: #a16207;
 }
 
-
-/* Interview */
-
 .status-interview {
   background: #dbeafe;
   color: #2563eb;
 }
 
-
-/* Selected */
-
 .status-selected {
   background: #dcfce7;
   color: #15803d;
 }
-
-
-/* Rejected */
 
 .status-rejected {
   background: #fee2e2;
@@ -445,9 +433,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    ACTION BUTTONS
-========================= */
+   ========================================================= */
 
 .action-buttons {
   display: flex;
@@ -479,13 +467,16 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
-   EDIT BUTTON
-   PURPLE
-========================= */
+/* =========================================================
+   EDIT
+   ========================================================= */
 
 .edit-btn {
-  background: linear-gradient(135deg, #a695ef 0%, #ddd6fe 100%);
+  background: linear-gradient(
+    135deg,
+    #a695ef 0%,
+    #ddd6fe 100%
+  );
 
   color: #6d28d9;
 
@@ -496,12 +487,11 @@ tbody tr:last-child td {
 }
 
 .edit-btn:hover {
-  background:
-    linear-gradient(
-      135deg,
-      #ddd6fe 0%,
-      #c4b5fd 100%
-    );
+  background: linear-gradient(
+    135deg,
+    #ddd6fe 0%,
+    #c4b5fd 100%
+  );
 
   color: #5b21b6;
 
@@ -514,13 +504,16 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
-   DELETE BUTTON
-   ENHANCED RED
-========================= */
+/* =========================================================
+   DELETE
+   ========================================================= */
 
 .delete-btn {
-     background: linear-gradient(135deg, #f6a4aa 0%, #fe5c69 100%);
+  background: linear-gradient(
+    135deg,
+    #f6a4aa 0%,
+    #fe5c69 100%
+  );
 
   color: #e11d48;
 
@@ -531,12 +524,11 @@ tbody tr:last-child td {
 }
 
 .delete-btn:hover {
-  background:
-    linear-gradient(
-      135deg,
-      #ffe4e6 0%,
-      #fecdd3 100%
-    );
+  background: linear-gradient(
+    135deg,
+    #ffe4e6 0%,
+    #fecdd3 100%
+  );
 
   color: #be123c;
 
@@ -549,9 +541,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    EMPTY STATE
-========================= */
+   ========================================================= */
 
 .empty-state {
   text-align: center;
@@ -563,7 +555,9 @@ tbody tr:last-child td {
 
 .empty-state > div {
   display: flex;
+
   align-items: center;
+
   flex-direction: column;
 }
 
@@ -580,7 +574,6 @@ tbody tr:last-child td {
   border-radius: 50%;
 
   background: #eef2ff;
-
   color: #6366f1;
 
   font-size: 23px;
@@ -603,9 +596,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    MODAL OVERLAY
-========================= */
+   ========================================================= */
 
 .modal-overlay {
   position: fixed;
@@ -620,7 +613,7 @@ tbody tr:last-child td {
 
   z-index: 1000;
 
-  padding: 20px;
+  padding: 15px;
 
   box-sizing: border-box;
 
@@ -630,16 +623,16 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+   ========================================================= */
 
 .modal {
   width: 100%;
   max-width: 500px;
 
-  max-height: calc(100vh - 40px);
-  max-height: calc(100dvh - 40px);
+  max-height: calc(100vh - 30px);
+  max-height: calc(100dvh - 30px);
 
   overflow-y: auto;
   overflow-x: hidden;
@@ -671,9 +664,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    MODAL HEADER
-========================= */
+   ========================================================= */
 
 .modal-header {
   display: flex;
@@ -682,7 +675,7 @@ tbody tr:last-child td {
 
   gap: 15px;
 
-  padding: 22px 24px 18px;
+  padding: 20px 24px 16px;
 
   border-bottom: 1px solid #f3f4f6;
 
@@ -724,6 +717,7 @@ tbody tr:last-child td {
   border-radius: 7px;
 
   background: transparent;
+
   color: #6b7280;
 
   font-size: 25px;
@@ -740,24 +734,24 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    MODAL BODY
-========================= */
+   ========================================================= */
 
 .modal-body {
-  padding: 22px 24px 8px;
+  padding: 17px 24px 4px;
 
   box-sizing: border-box;
 }
 
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 }
 
 .form-group label {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
   color: #374151;
 
@@ -768,7 +762,7 @@ tbody tr:last-child td {
 .form-group input,
 .form-group select {
   width: 100%;
-  height: 43px;
+  height: 42px;
 
   padding: 0 12px;
 
@@ -776,6 +770,7 @@ tbody tr:last-child td {
   border-radius: 9px;
 
   background: #ffffff;
+
   color: #111827;
 
   font-size: 14px;
@@ -802,9 +797,292 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
+   RESUME UPLOAD
+   ========================================================= */
+
+/*
+   Extra heading/description intentionally hidden.
+   Only the compact upload area is visible.
+ */
+
+.resume-upload-header {
+  display: none !important;
+}
+
+.resume-upload-title,
+.resume-upload-description {
+  display: none !important;
+}
+
+
+/* Main resume section */
+
+.resume-upload-section {
+  width: 100%;
+  box-sizing: border-box;
+
+  margin: 0 0 18px;
+
+  padding: 10px;
+
+  background: #faf9ff;
+
+  border: 1px solid #d9d3ff;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 16px rgba(99, 102, 241, 0.05);
+}
+
+
+/* Upload box */
+
+.resume-upload-box {
+  width: 100%;
+  min-height: 112px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 14px 12px;
+
+  background: #ffffff;
+
+  border: 1.5px dashed #c4b5fd;
+
+  border-radius: 11px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.resume-upload-box:hover {
+  border-color: #8b5cf6;
+
+  background: #fcfbff;
+
+  box-shadow:
+    0 4px 12px rgba(99, 102, 241, 0.06);
+}
+
+
+/* Upload icon */
+
+.resume-upload-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 6px;
+
+  border-radius: 10px;
+
+  background: #f1efff;
+
+  color: #7c3aed;
+
+  font-size: 19px;
+
+  line-height: 1;
+}
+
+
+/* Upload content */
+
+.resume-upload-content {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  width: 100%;
+
+  min-width: 0;
+
+  margin-bottom: 8px;
+}
+
+.resume-upload-content strong {
+  display: block;
+
+  max-width: 100%;
+
+  color: #111827;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  text-align: center;
+
+  word-break: break-word;
+}
+
+.resume-upload-content span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+
+  text-align: center;
+}
+
+
+/* Choose Resume button */
+
+.resume-upload-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 120px;
+
+  min-height: 36px;
+
+  padding: 8px 15px;
+
+  border: 1px solid #c4b5fd;
+
+  border-radius: 9px;
+
+  background: #f5f3ff;
+
+  color: #5b21b6;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.resume-upload-btn:hover {
+  background: #ede9fe;
+
+  border-color: #a78bfa;
+
+  color: #4c1d95;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 10px rgba(124, 58, 237, 0.12);
+}
+
+.resume-upload-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* Hidden actual input */
+
+.resume-upload-box input[type="file"] {
+  display: none !important;
+}
+
+
+/* =========================================================
+   RESUME SUCCESS
+   ========================================================= */
+
+.resume-success-message {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  margin-top: 8px;
+
+  padding: 7px 9px;
+
+  border: 1px solid #bbf7d0;
+
+  border-radius: 8px;
+
+  background: #f0fdf4;
+
+  color: #15803d;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   RESUME ERROR
+   ========================================================= */
+
+.resume-error-message {
+  margin-top: 8px;
+
+  padding: 7px 9px;
+
+  border: 1px solid #fecaca;
+
+  border-radius: 8px;
+
+  background: #fef2f2;
+
+  color: #dc2626;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+
+  text-align: center;
+}
+
+
+/* =========================================================
    MODAL FOOTER
-========================= */
+   ========================================================= */
 
 .modal-footer {
   display: flex;
@@ -813,7 +1091,7 @@ tbody tr:last-child td {
 
   gap: 10px;
 
-  padding: 18px 24px 22px;
+  padding: 15px 24px 19px;
 
   border-top: 1px solid #f3f4f6;
 
@@ -831,6 +1109,7 @@ tbody tr:last-child td {
   cursor: pointer;
 
   font-size: 13px;
+
   font-weight: 600;
 
   transition: all 0.2s ease;
@@ -838,6 +1117,7 @@ tbody tr:last-child td {
 
 .cancel-btn {
   background: #f3f4f6;
+
   color: #374151;
 
   border: 1px solid #e5e7eb;
@@ -875,10 +1155,20 @@ tbody tr:last-child td {
     0 7px 18px rgba(99, 102, 241, 0.3);
 }
 
+.modal-footer .save-btn:disabled {
+  opacity: 0.6;
 
-/* =========================
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
    TABLET
-========================= */
+   ========================================================= */
 
 @media (max-width: 1024px) {
 
@@ -902,9 +1192,9 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+   ========================================================= */
 
 @media (max-width: 768px) {
 
@@ -947,6 +1237,7 @@ tbody tr:last-child td {
 
   .filters {
     flex-direction: column;
+
     align-items: stretch;
 
     gap: 10px;
@@ -988,23 +1279,93 @@ tbody tr:last-child td {
   .modal-overlay {
     align-items: center;
 
-    padding: 15px;
+    padding: 10px;
   }
 
   .modal {
     max-width: 100%;
 
-    max-height: calc(100vh - 30px);
-    max-height: calc(100dvh - 30px);
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
 
     border-radius: 14px;
+  }
+
+  .modal-header {
+    padding: 17px 18px 14px;
+  }
+
+  .modal-header h2 {
+    font-size: 19px;
+  }
+
+  .modal-header p {
+    font-size: 12px;
+  }
+
+  .modal-body {
+    padding: 14px 18px 3px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 41px;
+
+    font-size: 13px;
+  }
+
+  .modal-footer {
+    padding: 13px 18px 16px;
+
+    gap: 8px;
+  }
+
+  .resume-upload-section {
+    padding: 8px;
+
+    margin-bottom: 15px;
+  }
+
+  .resume-upload-box {
+    min-height: 108px;
+
+    padding: 12px 10px;
+  }
+
+  .resume-upload-icon {
+    width: 36px;
+    height: 36px;
+
+    font-size: 18px;
+  }
+
+  .resume-upload-content strong {
+    font-size: 12px;
+  }
+
+  .resume-upload-content span {
+    font-size: 10px;
+  }
+
+  .resume-upload-btn {
+    min-width: 115px;
+
+    min-height: 34px;
+
+    padding: 7px 13px;
+
+    font-size: 11px;
   }
 }
 
 
-/* =========================
+/* =========================================================
    SMALL MOBILE
-========================= */
+   ========================================================= */
 
 @media (max-width: 480px) {
 
@@ -1052,11 +1413,13 @@ tbody tr:last-child td {
 
   th {
     padding: 12px;
+
     font-size: 10px;
   }
 
   td {
     padding: 12px;
+
     font-size: 12px;
   }
 
@@ -1067,6 +1430,7 @@ tbody tr:last-child td {
   .candidate-avatar {
     width: 36px;
     height: 36px;
+
     min-width: 36px;
 
     font-size: 13px;
@@ -1085,18 +1449,18 @@ tbody tr:last-child td {
   }
 
   .modal-overlay {
-    padding: 10px;
+    padding: 7px;
   }
 
   .modal {
-    max-height: calc(100vh - 20px);
-    max-height: calc(100dvh - 20px);
+    max-height: calc(100vh - 14px);
+    max-height: calc(100dvh - 14px);
 
     border-radius: 12px;
   }
 
   .modal-header {
-    padding: 17px 16px 14px;
+    padding: 15px 16px 13px;
   }
 
   .modal-header h2 {
@@ -1104,25 +1468,27 @@ tbody tr:last-child td {
   }
 
   .modal-header p {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .modal-body {
-    padding: 17px 16px 5px;
+    padding: 13px 16px 2px;
   }
 
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 13px;
   }
 
   .form-group input,
   .form-group select {
-    height: 42px;
+    height: 40px;
+
     font-size: 13px;
   }
 
   .modal-footer {
-    padding: 14px 16px 17px;
+    padding: 12px 16px 15px;
+
     gap: 8px;
   }
 
@@ -1132,16 +1498,68 @@ tbody tr:last-child td {
 
     min-width: 0;
 
-    padding: 10px 12px;
+    padding: 9px 12px;
 
     font-size: 12px;
+  }
+
+  .resume-upload-section {
+    padding: 7px;
+
+    margin-bottom: 14px;
+
+    border-radius: 11px;
+  }
+
+  .resume-upload-box {
+    min-height: 104px;
+
+    padding: 11px 8px;
+
+    border-radius: 9px;
+  }
+
+  .resume-upload-icon {
+    width: 34px;
+    height: 34px;
+
+    margin-bottom: 5px;
+
+    font-size: 17px;
+  }
+
+  .resume-upload-content {
+    margin-bottom: 7px;
+  }
+
+  .resume-upload-content strong {
+    font-size: 11px;
+  }
+
+  .resume-upload-content span {
+    font-size: 9px;
+  }
+
+  .resume-upload-btn {
+    min-width: 110px;
+
+    min-height: 33px;
+
+    padding: 7px 12px;
+
+    font-size: 10px;
+  }
+
+  .resume-success-message,
+  .resume-error-message {
+    font-size: 10px;
   }
 }
 
 
-/* =========================
+/* =========================================================
    VERY SMALL MOBILE
-========================= */
+   ========================================================= */
 
 @media (max-width: 360px) {
 
@@ -1176,25 +1594,63 @@ tbody tr:last-child td {
   .candidate-avatar {
     width: 34px;
     height: 34px;
+
     min-width: 34px;
   }
 
   .modal-overlay {
-    padding: 7px;
+    padding: 5px;
   }
 
   .modal-header {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 13px;
+    padding-right: 13px;
   }
 
   .modal-body {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 13px;
+    padding-right: 13px;
   }
 
   .modal-footer {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .resume-upload-section {
+    padding: 6px;
+
+    margin-bottom: 12px;
+  }
+
+  .resume-upload-box {
+    min-height: 100px;
+
+    padding: 10px 6px;
+  }
+
+  .resume-upload-icon {
+    width: 32px;
+    height: 32px;
+
+    font-size: 16px;
+  }
+
+  .resume-upload-content strong {
+    font-size: 10px;
+  }
+
+  .resume-upload-content span {
+    font-size: 9px;
+  }
+
+  .resume-upload-btn {
+    min-width: 105px;
+
+    min-height: 32px;
+
+    padding: 6px 10px;
+
+    font-size: 10px;
   }
 }

@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,7 +9,13 @@ export interface CandidateData {
   phone: string;
   position: string;
   experience: string;
+  location: string;
   status: string;
+  skills: string;
+  education: string;
+  linkedin: string;
+  portfolio: string;
+  notes: string;
   appliedDate?: string;
   jobId?: string | number | null;
 }
