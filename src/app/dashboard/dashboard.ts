@@ -165,9 +165,7 @@ export class Dashboard
     this.candidateService
       .getCandidates()
       .subscribe({
-        next: (
-          candidates: CandidateData[]
-        ) => {
+        next: (candidates: CandidateData[]) => {
 
           const safeCandidates =
             candidates || [];
@@ -211,9 +209,7 @@ export class Dashboard
     this.jobService
       .getJobs()
       .subscribe({
-        next: (
-          jobs: JobData[]
-        ) => {
+        next: (jobs: JobData[]) => {
 
           const safeJobs =
             jobs || [];
@@ -243,7 +239,7 @@ export class Dashboard
       });
 
     // ==============================
-    // Load Interviews From API
+    // Load Interviews
     // ==============================
 
     this.interviewService
@@ -281,7 +277,7 @@ export class Dashboard
   }
 
   // ==============================
-  // REFRESH API-DEPENDENT CHARTS
+  // REFRESH CHARTS
   // ==============================
 
   refreshCharts(): void {
@@ -299,6 +295,8 @@ export class Dashboard
       this.createWeeklyRecruitmentChart(
         this.candidates
       );
+
+      this.createTrafficChart();
 
     });
   }
@@ -332,45 +330,31 @@ export class Dashboard
     this.trafficStats[3].value =
       totalCandidates.toString();
 
+    const getStatusCount =
+      (status: string): number => {
+
+        return safeCandidates.filter(
+          candidate =>
+            (candidate.status || '')
+              .toLowerCase()
+              .trim() === status
+        ).length;
+      };
+
     const applied =
-      safeCandidates.filter(
-        candidate =>
-          (candidate.status || '')
-            .toLowerCase()
-            .trim() === 'applied'
-      ).length;
+      getStatusCount('applied');
 
     const screening =
-      safeCandidates.filter(
-        candidate =>
-          (candidate.status || '')
-            .toLowerCase()
-            .trim() === 'screening'
-      ).length;
+      getStatusCount('screening');
 
     const candidateInterview =
-      safeCandidates.filter(
-        candidate =>
-          (candidate.status || '')
-            .toLowerCase()
-            .trim() === 'interview'
-      ).length;
+      getStatusCount('interview');
 
     const selected =
-      safeCandidates.filter(
-        candidate =>
-          (candidate.status || '')
-            .toLowerCase()
-            .trim() === 'selected'
-      ).length;
+      getStatusCount('selected');
 
     const rejected =
-      safeCandidates.filter(
-        candidate =>
-          (candidate.status || '')
-            .toLowerCase()
-            .trim() === 'rejected'
-      ).length;
+      getStatusCount('rejected');
 
     this.pipeline = [
       {
@@ -423,21 +407,19 @@ export class Dashboard
     this.recentCandidates =
       safeCandidates
         .slice(0, 4)
-        .map(
-          candidate => ({
-            name:
-              candidate.name ||
-              'Unknown',
+        .map(candidate => ({
+          name:
+            candidate.name ||
+            'Unknown',
 
-            position:
-              candidate.position ||
-              'Not specified',
+          position:
+            candidate.position ||
+            'Not specified',
 
-            status:
-              candidate.status ||
-              'Applied',
-          })
-        );
+          status:
+            candidate.status ||
+            'Applied',
+        }));
 
     this.cdr.detectChanges();
   }
@@ -528,43 +510,39 @@ export class Dashboard
     this.recentJobs =
       safeJobs
         .slice(0, 3)
-        .map(
-          job => ({
-            ...job,
-            applicants:
-              this.getJobApplicantCount(
-                job
-              ),
-          })
-        );
+        .map(job => ({
+          ...job,
+
+          applicants:
+            this.getJobApplicantCount(
+              job
+            ),
+        }));
 
     this.topJobs =
       safeJobs
-        .map(
-          job => {
+        .map(job => {
 
-            const applicantCount =
-              this.getJobApplicantCount(
-                job
-              );
+          const applicantCount =
+            this.getJobApplicantCount(
+              job
+            );
 
-            return {
+          return {
+            ...job,
 
-              ...job,
+            applicants:
+              applicantCount,
 
-              applicants:
-                applicantCount,
-
-              engagement:
-                Math.min(
-                  100,
-                  Math.round(
-                    applicantCount * 3
-                  )
-                ),
-            };
-          }
-        )
+            engagement:
+              Math.min(
+                100,
+                Math.round(
+                  applicantCount * 3
+                )
+              ),
+          };
+        })
         .sort(
           (a, b) =>
             (b.applicants || 0) -
@@ -626,42 +604,36 @@ export class Dashboard
       return;
     }
 
-    const interviews =
-      this.interviews;
-
     const chartJobs =
       [...this.jobs]
-        .map(
-          job => {
+        .map(job => {
 
-            const applicantCount =
-              this.getJobApplicantCount(
-                job
-              );
+          const applicantCount =
+            this.getJobApplicantCount(
+              job
+            );
 
-            const interviewCount =
-              interviews.filter(
-                interview =>
-                  (interview.position || '')
-                    .toLowerCase()
-                    .trim() ===
-                  (job.title || '')
-                    .toLowerCase()
-                    .trim()
-              ).length;
+          const interviewCount =
+            this.interviews.filter(
+              interview =>
+                (interview.position || '')
+                  .toLowerCase()
+                  .trim() ===
+                (job.title || '')
+                  .toLowerCase()
+                  .trim()
+            ).length;
 
-            return {
+          return {
+            ...job,
 
-              ...job,
+            calculatedApplicants:
+              applicantCount,
 
-              calculatedApplicants:
-                applicantCount,
-
-              calculatedInterviews:
-                interviewCount,
-            };
-          }
-        )
+            calculatedInterviews:
+              interviewCount,
+          };
+        })
         .sort(
           (a, b) =>
             b.calculatedApplicants -
@@ -671,20 +643,17 @@ export class Dashboard
 
     const labels =
       chartJobs.map(
-        job =>
-          job.title
+        job => job.title
       );
 
     const applications =
       chartJobs.map(
-        job =>
-          job.calculatedApplicants
+        job => job.calculatedApplicants
       );
 
     const interviewCounts =
       chartJobs.map(
-        job =>
-          job.calculatedInterviews
+        job => job.calculatedInterviews
       );
 
     setTimeout(() => {
@@ -705,117 +674,99 @@ export class Dashboard
         new Chart(
           canvas,
           {
-
             type: 'bar',
 
             data: {
-
               labels,
 
               datasets: [
-
                 {
-
-                  label:
-                    'Applications',
+                  label: 'Applications',
 
                   data:
                     applications,
 
                   backgroundColor:
-                    '#82b6e8',
+                    '#7C5CFC',
 
-                  borderRadius:
-                    7,
+                  borderColor:
+                    '#7C5CFC',
 
-                  borderSkipped:
-                    false,
+                  borderRadius: 8,
 
-                  barThickness:
-                    16,
+                  borderSkipped: false,
+
+                  barThickness: 18,
                 },
 
                 {
-
-                  label:
-                    'Interviews',
+                  label: 'Interviews',
 
                   data:
                     interviewCounts,
 
                   backgroundColor:
-                    '#f2a65a',
+                    '#F59E42',
 
-                  borderRadius:
-                    7,
+                  borderColor:
+                    '#F59E42',
 
-                  borderSkipped:
-                    false,
+                  borderRadius: 8,
 
-                  barThickness:
-                    16,
+                  borderSkipped: false,
+
+                  barThickness: 18,
                 },
               ],
             },
 
             options: {
-
               responsive: true,
 
-              maintainAspectRatio:
-                false,
+              maintainAspectRatio: false,
 
               interaction: {
-
                 mode: 'index',
-
                 intersect: false,
               },
 
               plugins: {
-
                 legend: {
+                  position: 'top',
+                  align: 'end',
 
-                  position:
-                    'top',
-
-                  align:
-                    'end',
+                  labels: {
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    padding: 18,
+                  },
                 },
               },
 
               scales: {
-
                 x: {
-
                   grid: {
-
                     display: false,
                   },
 
                   ticks: {
-
-                    maxRotation:
-                      35,
-
-                    minRotation:
-                      0,
+                    maxRotation: 35,
+                    minRotation: 0,
+                    color: '#64748B',
                   },
                 },
 
                 y: {
-
                   beginAtZero: true,
 
                   ticks: {
-
                     stepSize: 1,
+                    color: '#64748B',
                   },
 
                   grid: {
-
                     color:
-                      '#edf1f5',
+                      'rgba(148, 163, 184, 0.16)',
                   },
                 },
               },
@@ -852,70 +803,61 @@ export class Dashboard
 
       const pipelineData =
         this.pipeline.map(
-          item =>
-            item.count
+          item => item.count
         );
 
       this.pipelineChart =
         new Chart(
           canvas,
           {
-
             type: 'doughnut',
 
             data: {
-
               labels:
                 this.pipeline.map(
-                  item =>
-                    item.title
+                  item => item.title
                 ),
 
               datasets: [
-
                 {
-
                   data:
                     pipelineData,
 
                   backgroundColor: [
-
-                    '#82b6e8',
-
-                    '#b7d3ed',
-
-                    '#f2a65a',
-
-                    '#8fc7b5',
-
-                    '#e88b8b',
+                    '#7C5CFC',
+                    '#4F8DF7',
+                    '#F59E42',
+                    '#35B77A',
+                    '#F06A6A',
                   ],
 
                   borderColor:
                     '#ffffff',
 
-                  borderWidth:
-                    4,
+                  borderWidth: 5,
 
-                  hoverOffset:
-                    12,
+                  hoverOffset: 10,
                 },
               ],
             },
 
             options: {
-
               responsive: true,
 
-              maintainAspectRatio:
-                false,
+              maintainAspectRatio: false,
+
+              cutout: '68%',
 
               plugins: {
-
                 legend: {
+                  position: 'bottom',
 
-                  position:
-                    'bottom',
+                  labels: {
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    padding: 16,
+                    color: '#475569',
+                  },
                 },
               },
             },
@@ -949,182 +891,165 @@ export class Dashboard
         new Chart(
           canvas,
           {
-
             type: 'line',
 
             data: {
-
               labels: [
-
                 'Mon',
-
                 'Tue',
-
                 'Wed',
-
                 'Thu',
-
                 'Fri',
-
                 'Sat',
-
                 'Sun',
               ],
 
               datasets: [
-
                 {
-
-                  label:
-                    'Profile Views',
+                  label: 'Profile Views',
 
                   data: [
-
                     280,
-
                     360,
-
                     310,
-
                     450,
-
                     420,
-
                     380,
-
                     510,
                   ],
 
                   borderColor:
-                    '#82b6e8',
+                    '#4F8DF7',
 
                   backgroundColor:
-                    'rgba(130, 182, 232, 0.15)',
+                    'rgba(79, 141, 247, 0.12)',
 
-                  borderWidth:
-                    3,
+                  borderWidth: 2.5,
 
-                  tension:
-                    0.4,
+                  tension: 0.42,
 
-                  fill:
-                    true,
+                  fill: true,
 
-                  pointRadius:
-                    4,
+                  pointRadius: 4,
 
-                  pointHoverRadius:
-                    7,
+                  pointHoverRadius: 7,
 
                   pointBackgroundColor:
-                    '#82b6e8',
+                    '#4F8DF7',
 
                   pointBorderColor:
                     '#ffffff',
 
-                  pointBorderWidth:
-                    2,
+                  pointBorderWidth: 2,
                 },
 
                 {
-
-                  label:
-                    'Job Views',
+                  label: 'Job Views',
 
                   data: [
-
                     220,
-
                     300,
-
                     270,
-
                     380,
-
                     350,
-
                     330,
-
                     430,
                   ],
 
                   borderColor:
-                    '#f2a65a',
+                    '#35B77A',
 
                   backgroundColor:
-                    'rgba(242, 166, 90, 0.10)',
+                    'rgba(53, 183, 122, 0.08)',
 
-                  borderWidth:
-                    3,
+                  borderWidth: 2.5,
 
-                  tension:
-                    0.4,
+                  tension: 0.42,
 
-                  fill:
-                    true,
+                  fill: true,
 
-                  pointRadius:
-                    4,
+                  pointRadius: 4,
 
-                  pointHoverRadius:
-                    7,
+                  pointHoverRadius: 7,
 
                   pointBackgroundColor:
-                    '#f2a65a',
+                    '#35B77A',
 
                   pointBorderColor:
                     '#ffffff',
 
-                  pointBorderWidth:
-                    2,
+                  pointBorderWidth: 2,
                 },
               ],
             },
 
             options: {
-
               responsive: true,
 
-              maintainAspectRatio:
-                false,
+              maintainAspectRatio: false,
 
               interaction: {
-
                 mode: 'index',
-
                 intersect: false,
               },
 
               plugins: {
-
                 legend: {
+                  position: 'top',
 
-                  position:
-                    'top',
+                  align: 'end',
 
-                  align:
-                    'end',
+                  labels: {
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    padding: 16,
+
+                    color:
+                      '#475569',
+                  },
+                },
+
+                tooltip: {
+                  mode: 'index',
+                  intersect: false,
                 },
               },
 
               scales: {
-
                 x: {
-
                   grid: {
-
                     display: false,
+                  },
+
+                  border: {
+                    display: false,
+                  },
+
+                  ticks: {
+                    color:
+                      '#64748B',
+
+                    padding: 8,
                   },
                 },
 
                 y: {
-
                   beginAtZero: true,
 
-                  grid: {
+                  border: {
+                    display: false,
+                  },
 
+                  ticks: {
                     color:
-                      '#edf1f5',
+                      '#64748B',
+
+                    padding: 8,
+                  },
+
+                  grid: {
+                    color:
+                      'rgba(148, 163, 184, 0.12)',
                   },
                 },
               },
@@ -1158,19 +1083,12 @@ export class Dashboard
       );
 
     const weekDays = [
-
       'Mon',
-
       'Tue',
-
       'Wed',
-
       'Thu',
-
       'Fri',
-
       'Sat',
-
       'Sun',
     ];
 
@@ -1192,109 +1110,145 @@ export class Dashboard
         new Chart(
           canvas,
           {
-
-            type: 'bar',
+            type: 'line',
 
             data: {
-
-              labels:
-                weekDays,
+              labels: weekDays,
 
               datasets: [
-
                 {
-
-                  label:
-                    'Applications',
+                  label: 'Applications',
 
                   data:
                     applicationsByDay,
 
+                  borderColor:
+                    '#7C5CFC',
+
                   backgroundColor:
-                    '#82b6e8',
+                    'rgba(124, 92, 252, 0.10)',
 
-                  borderRadius:
-                    7,
+                  borderWidth: 2.5,
 
-                  borderSkipped:
-                    false,
+                  tension: 0.42,
 
-                  barThickness:
-                    18,
+                  fill: true,
+
+                  pointRadius: 4,
+
+                  pointHoverRadius: 7,
+
+                  pointBackgroundColor:
+                    '#7C5CFC',
+
+                  pointBorderColor:
+                    '#ffffff',
+
+                  pointBorderWidth: 2,
                 },
 
                 {
-
-                  label:
-                    'Interviews',
+                  label: 'Interviews',
 
                   data:
                     interviewsByDay,
 
+                  borderColor:
+                    '#F59E42',
+
                   backgroundColor:
-                    '#f2a65a',
+                    'rgba(245, 158, 66, 0.08)',
 
-                  borderRadius:
-                    7,
+                  borderWidth: 2.5,
 
-                  borderSkipped:
-                    false,
+                  tension: 0.42,
 
-                  barThickness:
-                    18,
+                  fill: true,
+
+                  pointRadius: 4,
+
+                  pointHoverRadius: 7,
+
+                  pointBackgroundColor:
+                    '#F59E42',
+
+                  pointBorderColor:
+                    '#ffffff',
+
+                  pointBorderWidth: 2,
                 },
               ],
             },
 
             options: {
-
               responsive: true,
 
-              maintainAspectRatio:
-                false,
+              maintainAspectRatio: false,
 
               interaction: {
-
                 mode: 'index',
-
                 intersect: false,
               },
 
               plugins: {
-
                 legend: {
+                  position: 'top',
 
-                  position:
-                    'top',
+                  align: 'end',
 
-                  align:
-                    'end',
+                  labels: {
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    padding: 16,
+
+                    color:
+                      '#475569',
+                  },
+                },
+
+                tooltip: {
+                  mode: 'index',
+                  intersect: false,
                 },
               },
 
               scales: {
-
                 x: {
-
                   grid: {
-
                     display: false,
+                  },
+
+                  border: {
+                    display: false,
+                  },
+
+                  ticks: {
+                    color:
+                      '#64748B',
+
+                    padding: 8,
                   },
                 },
 
                 y: {
-
                   beginAtZero: true,
 
-                  ticks: {
+                  border: {
+                    display: false,
+                  },
 
+                  ticks: {
                     stepSize: 1,
+
+                    color:
+                      '#64748B',
+
+                    padding: 8,
                   },
 
                   grid: {
-
                     color:
-                      '#edf1f5',
+                      'rgba(148, 163, 184, 0.12)',
                   },
                 },
               },
@@ -1489,35 +1443,30 @@ export class Dashboard
   // ==============================
 
   addCandidate(): void {
-
     this.router.navigate([
       '/add-candidate',
     ]);
   }
 
   viewCandidates(): void {
-
     this.router.navigate([
       '/candidates',
     ]);
   }
 
   viewJobs(): void {
-
     this.router.navigate([
       '/jobs',
     ]);
   }
 
   viewInterviews(): void {
-
     this.router.navigate([
       '/interviews',
     ]);
   }
 
   viewAnalytics(): void {
-
     this.router.navigate([
       '/analytics',
     ]);

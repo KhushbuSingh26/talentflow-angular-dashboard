@@ -162,47 +162,111 @@
   </div>
 
 
-  <!-- WEEKLY RECRUITMENT -->
-  <div class="dashboard-card chart-card weekly-recruitment-card">
+  <!-- WEEKLY CHARTS -->
+  <div class="weekly-charts-grid">
 
-    <div class="card-header">
+    <!-- WEEKLY RECRUITMENT -->
+    <div class="dashboard-card chart-card weekly-recruitment-card">
 
-      <div>
-        <h2>Weekly Recruitment Activity</h2>
-        <p>Track applications and interviews throughout the week</p>
+      <div class="card-header">
+
+        <div>
+          <h2>Weekly Recruitment Activity</h2>
+          <p>Track applications and interviews throughout the week</p>
+        </div>
+
+        <span class="card-tag orange-tag">
+          This Week
+        </span>
+
       </div>
 
-      <span class="card-tag orange-tag">
-        This Week
-      </span>
+      <div class="weekly-recruitment-chart-container">
+        <canvas id="weeklyRecruitmentChart"></canvas>
+      </div>
 
     </div>
 
-    <div class="weekly-recruitment-chart-container">
-      <canvas id="weeklyRecruitmentChart"></canvas>
+
+    <!-- WEEKLY TRAFFIC -->
+    <div class="dashboard-card chart-card weekly-traffic-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Weekly Traffic</h2>
+          <p>Compare profile views and job views this week</p>
+        </div>
+
+        <span class="card-tag blue-tag">
+          This Week
+        </span>
+
+      </div>
+
+      <div class="traffic-chart-container">
+        <canvas id="trafficChart"></canvas>
+      </div>
+
     </div>
 
   </div>
 
 
-  <!-- WEEKLY TRAFFIC -->
-  <div class="dashboard-card chart-card weekly-traffic-card">
+  <!-- HIRING PIPELINE -->
+  <div class="dashboard-card pipeline-overview">
 
     <div class="card-header">
 
       <div>
-        <h2>Weekly Traffic</h2>
-        <p>Compare profile views and job views this week</p>
+        <h2>Hiring Pipeline Overview</h2>
+        <p>Track candidates across each recruitment stage</p>
       </div>
 
-      <span class="card-tag blue-tag">
-        This Week
+      <span class="card-tag orange-tag">
+        Updated Today
       </span>
 
     </div>
 
-    <div class="traffic-chart-container">
-      <canvas id="trafficChart"></canvas>
+
+    <div class="pipeline-list">
+
+      <div
+        class="pipeline-item"
+        *ngFor="let item of pipeline"
+      >
+
+        <div class="pipeline-info">
+
+          <div>
+
+            <strong>{{ item.title }}</strong>
+
+            <span>
+              {{ item.count }} candidates
+            </span>
+
+          </div>
+
+          <strong>
+            {{ item.percentage }}%
+          </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="item.percentage"
+          ></div>
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -211,6 +275,7 @@
   <!-- RECRUITMENT CHARTS -->
   <div class="charts-grid">
 
+    <!-- RECRUITMENT OVERVIEW -->
     <div class="dashboard-card chart-card">
 
       <div class="card-header">
@@ -277,7 +342,6 @@
       </button>
 
     </div>
-
 
     <div
       class="top-jobs-grid"
@@ -352,68 +416,8 @@
   </div>
 
 
-  <!-- HIRING PIPELINE -->
-  <div class="dashboard-card pipeline-overview">
-
-    <div class="card-header">
-
-      <div>
-        <h2>Hiring Pipeline Overview</h2>
-        <p>Track candidates across each recruitment stage</p>
-      </div>
-
-      <span class="card-tag orange-tag">
-        Updated Today
-      </span>
-
-    </div>
-
-
-    <div class="pipeline-list">
-
-      <div
-        class="pipeline-item"
-        *ngFor="let item of pipeline"
-      >
-
-        <div class="pipeline-info">
-
-          <div>
-
-            <strong>{{ item.title }}</strong>
-
-            <span>
-              {{ item.count }} candidates
-            </span>
-
-          </div>
-
-          <strong>
-            {{ item.percentage }}%
-          </strong>
-
-        </div>
-
-
-        <div class="progress-bar">
-
-          <div
-            class="progress-fill"
-            [style.width.%]="item.percentage"
-          ></div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
   <!-- RECENT CANDIDATES AND JOBS -->
   <div class="dashboard-grid">
-
 
     <!-- RECENT CANDIDATES -->
     <div class="dashboard-card">

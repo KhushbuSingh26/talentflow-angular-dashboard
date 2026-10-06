@@ -6,7 +6,12 @@
   width: 100%;
   height: 90px;
 
-  background: #ffffff;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(248, 250, 255, 0.90)
+    );
 
   display: flex;
   align-items: center;
@@ -14,12 +19,21 @@
 
   padding: 0 35px;
 
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(79, 141, 247, 0.12);
 
   box-sizing: border-box;
 
   overflow: hidden;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
+
 
 /* =========================
    HEADER LEFT
@@ -36,21 +50,28 @@
   font-size: 24px;
   line-height: 1.2;
 
-  color: #111827;
+  color: #172033;
+
+  font-weight: 700;
 
   white-space: nowrap;
+
+  transition: color 0.3s ease;
 }
 
 .header p {
   margin: 5px 0 0;
 
-  color: #6b7280;
+  color: #667085;
 
   font-size: 14px;
   line-height: 1.4;
 
   white-space: nowrap;
+
+  transition: color 0.3s ease;
 }
+
 
 /* =========================
    HEADER RIGHT
@@ -65,6 +86,7 @@
   flex-shrink: 0;
 }
 
+
 /* =========================
    ICON BUTTON
 ========================= */
@@ -75,11 +97,14 @@
 
   flex: 0 0 42px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(79, 141, 247, 0.14);
 
-  background: #ffffff;
+  background:
+    rgba(255, 255, 255, 0.72);
 
-  border-radius: 10px;
+  color: #526176;
+
+  border-radius: 11px;
 
   cursor: pointer;
 
@@ -92,11 +117,58 @@
   padding: 0;
 
   box-sizing: border-box;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .icon-btn:hover {
-  background: #f9fafb;
+  background: rgba(79, 141, 247, 0.09);
+
+  border-color: rgba(79, 141, 247, 0.22);
+
+  color: #376fc7;
+
+  box-shadow:
+    0 5px 16px rgba(79, 141, 247, 0.10);
+
+  transform: translateY(-1px);
 }
+
+
+/* =========================
+   THEME TOGGLE
+========================= */
+
+.theme-toggle {
+  position: relative;
+}
+
+.theme-toggle span {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  line-height: 1;
+
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover span {
+  transform: rotate(12deg);
+}
+
 
 /* =========================
    NOTIFICATION
@@ -114,11 +186,16 @@
 
   background: #ef4444;
 
+  border: 2px solid #ffffff;
+
   border-radius: 50%;
 
-  top: 8px;
-  right: 8px;
+  top: 7px;
+  right: 7px;
+
+  box-sizing: content-box;
 }
+
 
 /* =========================
    HEADER PROFILE
@@ -143,7 +220,12 @@
 
   border-radius: 50%;
 
-  background: #6366f1;
+  background:
+    linear-gradient(
+      135deg,
+      #4f8df7 0%,
+      #6d5dfc 100%
+    );
 
   color: #ffffff;
 
@@ -155,6 +237,11 @@
   font-weight: 700;
 
   box-sizing: border-box;
+
+  border: 2px solid rgba(255, 255, 255, 0.55);
+
+  box-shadow:
+    0 6px 18px rgba(79, 141, 247, 0.20);
 }
 
 .profile-info {
@@ -167,24 +254,114 @@
 .profile-info strong {
   font-size: 14px;
 
-  color: #111827;
+  color: #172033;
+
+  font-weight: 600;
 
   white-space: nowrap;
+
+  transition: color 0.3s ease;
 }
 
 .profile-info span {
   font-size: 12px;
 
-  color: #6b7280;
+  color: #667085;
 
   white-space: nowrap;
+
+  transition: color 0.3s ease;
 }
+
+
+/* =========================
+   DARK THEME
+========================= */
+
+:host-context(.dark-theme) .header {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 27, 58, 0.90),
+      rgba(11, 20, 47, 0.92)
+    );
+
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.08);
+}
+
+:host-context(.dark-theme) .header h2 {
+  color: #f8fafc;
+}
+
+:host-context(.dark-theme) .header p {
+  color: #94a3b8;
+}
+
+:host-context(.dark-theme) .icon-btn {
+  background: rgba(255, 255, 255, 0.045);
+
+  border-color: rgba(255, 255, 255, 0.09);
+
+  color: #cbd5e1;
+}
+
+:host-context(.dark-theme) .icon-btn:hover {
+  background: rgba(79, 141, 247, 0.13);
+
+  border-color: rgba(79, 141, 247, 0.24);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 6px 18px rgba(79, 141, 247, 0.12);
+}
+
+:host-context(.dark-theme) .notification-dot {
+  border-color: #14203f;
+}
+
+:host-context(.dark-theme) .profile-info strong {
+  color: #f8fafc;
+}
+
+:host-context(.dark-theme) .profile-info span {
+  color: #94a3b8;
+}
+
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+:host-context(.light-theme) .header {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(248, 250, 255, 0.90)
+    );
+
+  border-bottom-color: rgba(79, 141, 247, 0.12);
+}
+
+:host-context(.light-theme) .header h2 {
+  color: #172033;
+}
+
+:host-context(.light-theme) .header p {
+  color: #667085;
+}
+
 
 /* =========================
    TABLET
 ========================= */
 
 @media (max-width: 1024px) {
+
   .header {
     height: 80px;
 
@@ -204,11 +381,13 @@
   }
 }
 
+
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
+
   .header {
     height: 76px;
 
@@ -272,11 +451,13 @@
   }
 }
 
+
 /* =========================
    SMALL MOBILE
 ========================= */
 
 @media (max-width: 480px) {
+
   .header {
     height: 70px;
 
@@ -328,11 +509,13 @@
   }
 }
 
+
 /* =========================
    VERY SMALL MOBILE
 ========================= */
 
 @media (max-width: 360px) {
+
   .header {
     padding: 0 8px;
   }

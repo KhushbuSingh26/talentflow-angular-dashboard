@@ -38,8 +38,7 @@ import {
 
   templateUrl: './analytics.html',
 })
-export class Analytics
-  implements AfterViewInit, OnDestroy {
+export class Analytics implements AfterViewInit, OnDestroy {
 
   recruitmentChart: Chart | undefined;
 
@@ -139,21 +138,26 @@ export class Analytics
 
 
   constructor(
-
     private candidateService: CandidateService,
-
     private jobService: JobService,
-
     private interviewService: InterviewService,
-
     private cdr: ChangeDetectorRef
+  ) {
 
-  ) {}
+    /*
+     * Global Chart.js text color.
+     * Soft gray instead of dark black.
+     */
 
+    Chart.defaults.color = '#6B7280';
 
-  /*
-   * PAGE INITIALIZATION
-   */
+    Chart.defaults.font.family =
+      'Arial, Helvetica, sans-serif';
+
+    Chart.defaults.font.size = 12;
+
+  }
+
 
   ngAfterViewInit(): void {
 
@@ -164,169 +168,134 @@ export class Analytics
   }
 
 
-  /*
-   * LOAD ANALYTICS DATA
-   */
-
   loadAnalyticsData(): void {
 
-    /*
-     * Load candidates from API
-     */
+    this.candidateService.getCandidates().subscribe({
 
-    this.candidateService
-      .getCandidates()
-      .subscribe({
+      next: (candidates: CandidateData[]) => {
 
-        next: (
-          candidates: CandidateData[]
-        ) => {
+        console.log(
+          'Analytics candidates loaded:',
+          candidates
+        );
 
-          console.log(
-            'Analytics candidates loaded:',
-            candidates
-          );
+        this.candidates = candidates || [];
 
-          this.candidates =
-            candidates || [];
+        this.updateCandidateStatus();
 
-          this.updateCandidateStatus();
+        this.calculateHiringSuccessRate();
 
-          this.calculateHiringSuccessRate();
+        this.updateAnalyticsCards();
 
-          this.updateAnalyticsCards();
+        this.refreshCharts();
 
-          this.refreshCharts();
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+      },
 
-        },
+      error: (error) => {
 
-        error: (error) => {
+        console.error(
+          'Error loading candidates:',
+          error
+        );
 
-          console.error(
-            'Error loading candidates:',
-            error
-          );
+        this.candidates = [];
 
-          this.candidates = [];
+        this.updateCandidateStatus();
 
-          this.updateCandidateStatus();
+        this.calculateHiringSuccessRate();
 
-          this.calculateHiringSuccessRate();
+        this.updateAnalyticsCards();
 
-          this.updateAnalyticsCards();
+        this.refreshCharts();
 
-          this.refreshCharts();
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+      },
 
-        },
-
-      });
+    });
 
 
-    /*
-     * Load jobs from API
-     */
+    this.jobService.getJobs().subscribe({
 
-    this.jobService
-      .getJobs()
-      .subscribe({
+      next: (jobs: JobData[]) => {
 
-        next: (
-          jobs: JobData[]
-        ) => {
+        console.log(
+          'Analytics jobs loaded:',
+          jobs
+        );
 
-          console.log(
-            'Analytics jobs loaded:',
-            jobs
-          );
+        this.jobs = jobs || [];
 
-          this.jobs =
-            jobs || [];
+        this.updateAnalyticsCards();
 
-          this.updateAnalyticsCards();
+        this.refreshCharts();
 
-          this.refreshCharts();
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+      },
 
-        },
+      error: (error) => {
 
-        error: (error) => {
+        console.error(
+          'Error loading jobs:',
+          error
+        );
 
-          console.error(
-            'Error loading jobs:',
-            error
-          );
+        this.jobs = [];
 
-          this.jobs = [];
+        this.updateAnalyticsCards();
 
-          this.updateAnalyticsCards();
+        this.refreshCharts();
 
-          this.refreshCharts();
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+      },
 
-        },
-
-      });
+    });
 
 
-    /*
-     * Load interviews from API
-     */
+    this.interviewService.getInterviews().subscribe({
 
-    this.interviewService
-      .getInterviews()
-      .subscribe({
+      next: (interviews: InterviewData[]) => {
 
-        next: (
-          interviews: InterviewData[]
-        ) => {
+        console.log(
+          'Analytics interviews loaded:',
+          interviews
+        );
 
-          console.log(
-            'Analytics interviews loaded:',
-            interviews
-          );
+        this.interviews = interviews || [];
 
-          this.interviews =
-            interviews || [];
+        this.updateAnalyticsCards();
 
-          this.updateAnalyticsCards();
+        this.refreshCharts();
 
-          this.refreshCharts();
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+      },
 
-        },
+      error: (error) => {
 
-        error: (error) => {
+        console.error(
+          'Error loading interviews:',
+          error
+        );
 
-          console.error(
-            'Error loading interviews:',
-            error
-          );
+        this.interviews = [];
 
-          this.interviews = [];
+        this.updateAnalyticsCards();
 
-          this.updateAnalyticsCards();
+        this.refreshCharts();
 
-          this.refreshCharts();
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+      },
 
-        },
-
-      });
+    });
 
   }
 
-
-  /*
-   * REFRESH ALL CHARTS
-   */
 
   refreshCharts(): void {
 
@@ -346,10 +315,6 @@ export class Analytics
 
   }
 
-
-  /*
-   * ANALYTICS CARDS
-   */
 
   updateAnalyticsCards(): void {
 
@@ -383,63 +348,36 @@ export class Analytics
 
       {
         title: 'Total Candidates',
-
-        value:
-          totalCandidates,
-
+        value: totalCandidates,
         change: 'Live',
-
-        description:
-          'Total candidates',
+        description: 'Total candidates',
       },
-
 
       {
         title: 'Active Jobs',
-
-        value:
-          activeJobs,
-
+        value: activeJobs,
         change: 'Live',
-
-        description:
-          'Currently hiring',
+        description: 'Currently hiring',
       },
-
 
       {
         title: 'Interviews',
-
-        value:
-          totalInterviews,
-
+        value: totalInterviews,
         change: 'Live',
-
-        description:
-          'Total scheduled interviews',
+        description: 'Total scheduled interviews',
       },
-
 
       {
         title: 'Successful Hires',
-
-        value:
-          successfulHires,
-
+        value: successfulHires,
         change: 'Live',
-
-        description:
-          'Selected candidates',
+        description: 'Selected candidates',
       },
 
     ];
 
   }
 
-
-  /*
-   * CANDIDATE STATUS
-   */
 
   updateCandidateStatus(): void {
 
@@ -448,9 +386,8 @@ export class Analytics
 
 
     const getCount =
-      (status: string): number => {
-
-        return this.candidates.filter(
+      (status: string): number =>
+        this.candidates.filter(
           candidate =>
             (candidate.status || '')
               .toLowerCase()
@@ -460,28 +397,21 @@ export class Analytics
               .trim()
         ).length;
 
-      };
-
 
     const applied =
       getCount('Applied');
 
-
     const shortlisted =
       getCount('Shortlisted');
-
 
     const screening =
       getCount('Screening');
 
-
     const interview =
       getCount('Interview');
 
-
     const selected =
       getCount('Selected');
-
 
     const rejected =
       getCount('Rejected');
@@ -491,9 +421,7 @@ export class Analytics
 
       {
         status: 'Applied',
-
         count: applied,
-
         percentage:
           this.calculatePercentage(
             applied,
@@ -501,12 +429,9 @@ export class Analytics
           ),
       },
 
-
       {
         status: 'Shortlisted',
-
         count: shortlisted,
-
         percentage:
           this.calculatePercentage(
             shortlisted,
@@ -514,12 +439,9 @@ export class Analytics
           ),
       },
 
-
       {
         status: 'Screening',
-
         count: screening,
-
         percentage:
           this.calculatePercentage(
             screening,
@@ -527,12 +449,9 @@ export class Analytics
           ),
       },
 
-
       {
         status: 'Interview',
-
         count: interview,
-
         percentage:
           this.calculatePercentage(
             interview,
@@ -540,12 +459,9 @@ export class Analytics
           ),
       },
 
-
       {
         status: 'Selected',
-
         count: selected,
-
         percentage:
           this.calculatePercentage(
             selected,
@@ -553,12 +469,9 @@ export class Analytics
           ),
       },
 
-
       {
         status: 'Rejected',
-
         count: rejected,
-
         percentage:
           this.calculatePercentage(
             rejected,
@@ -571,10 +484,6 @@ export class Analytics
   }
 
 
-  /*
-   * PERCENTAGE
-   */
-
   calculatePercentage(
     value: number,
     total: number
@@ -584,17 +493,12 @@ export class Analytics
       return 0;
     }
 
-
     return Math.round(
       (value / total) * 100
     );
 
   }
 
-
-  /*
-   * HIRING SUCCESS RATE
-   */
 
   calculateHiringSuccessRate(): void {
 
@@ -619,16 +523,6 @@ export class Analytics
 
   }
 
-
-  /*
-   * CHECK CANDIDATE AGAINST JOB
-   *
-   * First preference:
-   * candidate.jobId === job.id
-   *
-   * Fallback:
-   * candidate.position === job.title
-   */
 
   isCandidateForJob(
     candidate: CandidateData,
@@ -669,17 +563,10 @@ export class Analytics
     }
 
 
-    return (
-      candidatePosition ===
-      jobTitle
-    );
+    return candidatePosition === jobTitle;
 
   }
 
-
-  /*
-   * GET JOB APPLICANT COUNT
-   */
 
   getJobApplicantCount(
     job: JobData
@@ -696,15 +583,52 @@ export class Analytics
   }
 
 
-  /*
-   * RECRUITMENT OVERVIEW
-   *
-   * Applicant count is calculated
-   * directly from candidates.
-   *
-   * This keeps Analytics consistent
-   * with Dashboard and Jobs page.
-   */
+  private isDarkTheme(): boolean {
+
+    return (
+      document.body.classList.contains(
+        'dark-theme'
+      ) ||
+      document.documentElement.classList.contains(
+        'dark-theme'
+      )
+    );
+
+  }
+
+
+  private getChartTheme() {
+
+    /*
+     * Light professional gray chart text.
+     * Avoids harsh black while keeping labels
+     * clearly visible.
+     */
+
+    return {
+
+      text: '#6B7280',
+
+      mutedText: '#9CA3AF',
+
+      grid: this.isDarkTheme()
+        ? 'rgba(255,255,255,0.10)'
+        : 'rgba(107,114,128,0.10)',
+
+      tooltipBackground:
+        this.isDarkTheme()
+          ? '#171329'
+          : '#111827',
+
+      hiringTrack:
+        this.isDarkTheme()
+          ? '#302846'
+          : '#E9E7F2',
+
+    };
+
+  }
+
 
   createRecruitmentChart(): void {
 
@@ -730,24 +654,16 @@ export class Analytics
     const chartJobs =
       [...this.jobs]
 
-        .map(job => {
+        .map(job => ({
 
-          const applicantCount =
+          ...job,
+
+          calculatedApplicants:
             this.getJobApplicantCount(
               job
-            );
+            ),
 
-
-          return {
-
-            ...job,
-
-            calculatedApplicants:
-              applicantCount,
-
-          };
-
-        })
+        }))
 
         .sort(
           (a, b) =>
@@ -760,8 +676,7 @@ export class Analytics
 
     const labels =
       chartJobs.map(
-        job =>
-          job.title
+        job => job.title
       );
 
 
@@ -772,94 +687,246 @@ export class Analytics
       );
 
 
+    const theme =
+      this.getChartTheme();
+
+
+    const chartColors = [
+
+      '#7C3AED',
+
+      '#6D28D9',
+
+      '#4F46E5',
+
+      '#2563EB',
+
+      '#0891B2',
+
+      '#0D9488',
+
+    ];
+
+
     this.recruitmentChart =
-      new Chart(
-        canvas,
-        {
+      new Chart(canvas, {
 
-          type: 'bar',
+        type: 'bar',
 
-          data: {
+        data: {
 
-            labels,
+          labels,
 
-            datasets: [
+          datasets: [{
 
-              {
+            label: 'Candidates',
 
-                label:
-                  'Candidates',
+            data: applications,
 
-                data:
-                  applications,
+            backgroundColor:
+              chartColors.slice(
+                0,
+                applications.length
+              ),
 
-                backgroundColor:
-                  '#82B6E8',
+            borderColor:
+              chartColors.slice(
+                0,
+                applications.length
+              ),
 
-                borderRadius:
-                  5,
+            borderWidth: 1,
 
-                barPercentage:
-                  0.55,
+            borderRadius: 12,
 
-                categoryPercentage:
-                  0.7,
+            borderSkipped: false,
 
-              },
+            barPercentage: 0.72,
+
+            categoryPercentage: 0.76,
+
+            maxBarThickness: 38,
+
+            hoverBackgroundColor: [
+
+              '#8B5CF6',
+
+              '#7C3AED',
+
+              '#6366F1',
+
+              '#3B82F6',
+
+              '#06B6D4',
+
+              '#14B8A6',
 
             ],
+
+            hoverBorderColor:
+              '#FFFFFF',
+
+            hoverBorderWidth: 2,
+
+          }],
+
+        },
+
+
+        options: {
+
+          indexAxis: 'y',
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+
+          layout: {
+
+            padding: {
+
+              top: 8,
+
+              right: 18,
+
+              bottom: 8,
+
+              left: 8,
+
+            },
 
           },
 
 
-          options: {
+          animation: {
 
-            responsive: true,
+            duration: 1000,
 
-            maintainAspectRatio:
-              false,
+            easing: 'easeOutQuart',
+
+          },
 
 
-            plugins: {
+          interaction: {
 
-              legend: {
+            mode: 'nearest',
+
+            intersect: true,
+
+          },
+
+
+          plugins: {
+
+            legend: {
+
+              display: false,
+
+            },
+
+
+            tooltip: {
+
+              enabled: true,
+
+              backgroundColor:
+                theme.tooltipBackground,
+
+              titleColor:
+                '#FFFFFF',
+
+              bodyColor:
+                '#FFFFFF',
+
+              borderColor:
+                '#8B5CF6',
+
+              borderWidth: 1,
+
+              padding: 13,
+
+              displayColors: true,
+
+              cornerRadius: 10,
+
+              callbacks: {
+
+                label: (context) =>
+                  ` Candidates: ${context.parsed.x}`,
+
+              },
+
+            },
+
+          },
+
+
+          scales: {
+
+            y: {
+
+              grid: {
 
                 display: false,
 
               },
 
-            },
+              ticks: {
 
+                color:
+                  theme.text,
 
-            scales: {
+                padding: 10,
 
-              x: {
+                autoSkip: false,
 
-                grid: {
+                maxRotation: 0,
 
-                  display: false,
+                minRotation: 0,
+
+                font: {
+
+                  size: 12,
+
+                  weight: 500,
 
                 },
 
               },
 
+            },
 
-              y: {
 
-                beginAtZero: true,
+            x: {
 
-                ticks: {
+              beginAtZero: true,
 
-                  stepSize: 1,
+              ticks: {
+
+                color:
+                  theme.mutedText,
+
+                stepSize: 1,
+
+                precision: 0,
+
+                padding: 6,
+
+                font: {
+
+                  size: 11,
+
+                  weight: 400,
 
                 },
 
-                grid: {
+              },
 
-                  color:
-                    '#EDF1F5',
+              grid: {
 
-                },
+                color:
+                  theme.grid,
 
               },
 
@@ -867,15 +934,12 @@ export class Analytics
 
           },
 
-        }
-      );
+        },
+
+      });
 
   }
 
-
-  /*
-   * CANDIDATE DISTRIBUTION
-   */
 
   createCandidateChart(): void {
 
@@ -895,90 +959,192 @@ export class Analytics
 
     const labels =
       this.candidateStatus.map(
-        item =>
-          item.status
+        item => item.status
       );
 
 
     const data =
       this.candidateStatus.map(
-        item =>
-          item.count
+        item => item.count
       );
 
 
+    const theme =
+      this.getChartTheme();
+
+
     this.candidateChart =
-      new Chart(
-        canvas,
-        {
+      new Chart(canvas, {
 
-          type: 'doughnut',
+        type: 'doughnut',
 
-          data: {
+        data: {
 
-            labels,
+          labels,
 
-            datasets: [
+          datasets: [{
 
-              {
+            data,
 
-                data,
+            backgroundColor: [
 
-                backgroundColor: [
+              '#6D28D9',
 
-                  '#82B6E8',
+              '#4F46E5',
 
-                  '#9C83D4',
+              '#0891B2',
 
-                  '#B7D3ED',
+              '#F59E0B',
 
-                  '#EDCD63',
+              '#16A34A',
 
-                  '#8FC7B5',
-
-                  '#E88B8B',
-
-                ],
-
-                borderColor:
-                  '#FFFFFF',
-
-                borderWidth: 3,
-
-                hoverOffset: 8,
-
-              },
+              '#E11D48',
 
             ],
+
+            borderWidth: 0,
+
+            hoverOffset: 14,
+
+            spacing: 4,
+
+          }],
+
+        },
+
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+          cutout: '60%',
+
+
+          animation: {
+
+            duration: 1000,
+
+            easing: 'easeOutQuart',
 
           },
 
 
-          options: {
+          interaction: {
 
-            responsive: true,
+            mode: 'nearest',
 
-            maintainAspectRatio:
-              false,
+            intersect: true,
 
-            cutout:
-              '65%',
+          },
 
 
-            plugins: {
+          layout: {
 
-              legend: {
+            padding: {
 
-                position:
-                  'bottom',
+              top: 8,
 
-                labels: {
+              right: 8,
 
-                  padding: 16,
+              bottom: 8,
 
-                  boxWidth: 12,
+              left: 8,
 
-                  boxHeight: 12,
+            },
+
+          },
+
+
+          plugins: {
+
+            legend: {
+
+              display: true,
+
+              position: 'bottom',
+
+              labels: {
+
+                color:
+                  theme.text,
+
+                padding: 16,
+
+                boxWidth: 11,
+
+                boxHeight: 11,
+
+                usePointStyle: true,
+
+                pointStyle: 'circle',
+
+                textAlign: 'left',
+
+                font: {
+
+                  size: 11,
+
+                  weight: 500,
+
+                },
+
+              },
+
+            },
+
+
+            tooltip: {
+
+              enabled: true,
+
+              backgroundColor:
+                theme.tooltipBackground,
+
+              titleColor:
+                '#FFFFFF',
+
+              bodyColor:
+                '#FFFFFF',
+
+              borderColor:
+                '#7C3AED',
+
+              borderWidth: 1,
+
+              padding: 12,
+
+              cornerRadius: 10,
+
+              callbacks: {
+
+                label: (context) => {
+
+                  const value =
+                    Number(
+                      context.raw || 0
+                    );
+
+
+                  const total =
+                    data.reduce(
+                      (sum, item) =>
+                        sum + item,
+                      0
+                    );
+
+
+                  const percentage =
+                    total > 0
+                      ? Math.round(
+                          (value / total) *
+                          100
+                        )
+                      : 0;
+
+
+                  return `${context.label}: ${value} (${percentage}%)`;
 
                 },
 
@@ -988,15 +1154,12 @@ export class Analytics
 
           },
 
-        }
-      );
+        },
+
+      });
 
   }
 
-
-  /*
-   * HIRING PERFORMANCE
-   */
 
   createHiringChart(): void {
 
@@ -1015,7 +1178,13 @@ export class Analytics
 
 
     const successRate =
-      this.hiringSuccessRate;
+      Math.max(
+        0,
+        Math.min(
+          100,
+          this.hiringSuccessRate
+        )
+      );
 
 
     const remaining =
@@ -1025,75 +1194,113 @@ export class Analytics
       );
 
 
+    const theme =
+      this.getChartTheme();
+
+
     this.hiringChart =
-      new Chart(
-        canvas,
-        {
+      new Chart(canvas, {
 
-          type: 'doughnut',
+        type: 'doughnut',
 
-          data: {
+        data: {
 
-            datasets: [
+          datasets: [
 
-              {
+            {
 
-                data: [
+              data: [
 
-                  successRate,
+                successRate,
 
-                  remaining,
+                remaining,
 
-                ],
+              ],
 
-                backgroundColor: [
+              backgroundColor: [
 
-                  '#82B6E8',
+                '#7C3AED',
 
-                  '#E7EEF5',
+                theme.hiringTrack,
 
-                ],
+              ],
 
-                borderWidth:
-                  0,
+              borderWidth: 0,
 
-              },
+              hoverBackgroundColor: [
 
-            ],
+                '#A78BFA',
+
+                theme.hiringTrack,
+
+              ],
+
+              hoverOffset: 5,
+
+            },
+
+          ],
+
+        },
+
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+          cutout: '72%',
+
+          rotation: -115,
+
+          circumference: 230,
+
+
+          animation: {
+
+            duration: 1200,
+
+            easing: 'easeOutQuart',
 
           },
 
 
-          options: {
+          plugins: {
 
-            responsive: true,
+            legend: {
 
-            maintainAspectRatio:
-              false,
+              display: false,
 
-            cutout:
-              '78%',
+            },
 
 
-            rotation:
-              -90,
+            tooltip: {
 
-            circumference:
-              180,
+              enabled: true,
 
+              backgroundColor:
+                theme.tooltipBackground,
 
-            plugins: {
+              titleColor:
+                '#FFFFFF',
 
-              legend: {
+              bodyColor:
+                '#FFFFFF',
 
-                display: false,
+              borderColor:
+                '#8B5CF6',
 
-              },
+              borderWidth: 1,
 
+              padding: 10,
 
-              tooltip: {
+              cornerRadius: 10,
 
-                enabled: false,
+              callbacks: {
+
+                label: () =>
+                  ` Hiring success: ${successRate}%`,
 
               },
 
@@ -1101,15 +1308,26 @@ export class Analytics
 
           },
 
-        }
-      );
+        },
+
+      });
+
+
+    const centerValue =
+      document.querySelector(
+        '.chart-center strong'
+      ) as HTMLElement | null;
+
+
+    if (centerValue) {
+
+      centerValue.textContent =
+        `${successRate}%`;
+
+    }
 
   }
 
-
-  /*
-   * DATE FILTER
-   */
 
   onDateFilterChange(): void {
 
@@ -1117,10 +1335,6 @@ export class Analytics
 
   }
 
-
-  /*
-   * CLEANUP
-   */
 
   ngOnDestroy(): void {
 

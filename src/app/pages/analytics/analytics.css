@@ -30,6 +30,14 @@
   font-weight: 700;
 }
 
+:host-context(.light-theme) .page-header h1 {
+  color: #111827;
+}
+
+:host-context(.dark-theme) .page-header h1 {
+  color: #ffffff;
+}
+
 .page-header p {
   margin: 0;
 
@@ -69,13 +77,13 @@
 }
 
 .date-filter:hover {
-  border-color: #9fc3e1;
+  border-color: #9c83d4;
 }
 
 .date-filter:focus {
-  border-color: #82b6e8;
+  border-color: #7c5cfc;
 
-  box-shadow: 0 0 0 3px rgba(130, 182, 232, 0.14);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.12);
 }
 
 /* =========================
@@ -106,14 +114,14 @@
 
   background: #ffffff;
 
-  border: 1px solid #e0eaf2;
+  border: 1px solid #e0e7f0;
 
-  border-radius: 12px;
+  border-radius: 15px;
 
   padding: 18px;
 
   box-shadow:
-    0 3px 12px rgba(61, 91, 116, 0.06);
+    0 5px 18px rgba(31, 41, 55, 0.06);
 
   transition:
     transform 0.25s ease,
@@ -123,7 +131,49 @@
   box-sizing: border-box;
 }
 
-/* Small blue accent */
+/* Individual card accents */
+
+.stat-card:nth-child(1) {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f4f0ff 100%
+  );
+
+  border-color: #ddd4ff;
+}
+
+.stat-card:nth-child(2) {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #eef5ff 100%
+  );
+
+  border-color: #d4e3ff;
+}
+
+.stat-card:nth-child(3) {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #effbf5 100%
+  );
+
+  border-color: #d2f0df;
+}
+
+.stat-card:nth-child(4) {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #fff5e9 100%
+  );
+
+  border-color: #f5dfc0;
+}
+
+/* Colored top accents */
 
 .stat-card::before {
   content: '';
@@ -134,18 +184,64 @@
   left: 0;
 
   width: 100%;
-  height: 3px;
+  height: 4px;
 
-  background: #82b6e8;
+  border-radius: 15px 15px 0 0;
+}
+
+.stat-card:nth-child(1)::before {
+  background: linear-gradient(
+    90deg,
+    #7c5cfc,
+    #9b7cff
+  );
+}
+
+.stat-card:nth-child(2)::before {
+  background: linear-gradient(
+    90deg,
+    #4f8df7,
+    #6ca4ff
+  );
+}
+
+.stat-card:nth-child(3)::before {
+  background: linear-gradient(
+    90deg,
+    #22b573,
+    #55c98d
+  );
+}
+
+.stat-card:nth-child(4)::before {
+  background: linear-gradient(
+    90deg,
+    #f59e42,
+    #ffb866
+  );
 }
 
 .stat-card:hover {
-  transform: translateY(-3px);
-
-  border-color: #cbddea;
+  transform: translateY(-4px);
 
   box-shadow:
-    0 9px 24px rgba(61, 91, 116, 0.11);
+    0 12px 28px rgba(31, 41, 55, 0.11);
+}
+
+.stat-card:nth-child(1):hover {
+  border-color: #c5b8ff;
+}
+
+.stat-card:nth-child(2):hover {
+  border-color: #b9d2ff;
+}
+
+.stat-card:nth-child(3):hover {
+  border-color: #b7e5cb;
+}
+
+.stat-card:nth-child(4):hover {
+  border-color: #f0c994;
 }
 
 .stat-title {
@@ -163,9 +259,25 @@
 
   font-size: 28px;
 
-  color: #2f4052;
+  color: #26384a;
 
   font-weight: 700;
+}
+
+.stat-card:nth-child(1) h2 {
+  color: #6d4ee8;
+}
+
+.stat-card:nth-child(2) h2 {
+  color: #3d78d8;
+}
+
+.stat-card:nth-child(3) h2 {
+  color: #159b61;
+}
+
+.stat-card:nth-child(4) h2 {
+  color: #d77d25;
 }
 
 .stat-bottom {
@@ -179,11 +291,25 @@
 }
 
 .stat-change {
-  color: #5c91bd;
-
   font-size: 13px;
 
   font-weight: 600;
+}
+
+.stat-card:nth-child(1) .stat-change {
+  color: #7c5cfc;
+}
+
+.stat-card:nth-child(2) .stat-change {
+  color: #4f8df7;
+}
+
+.stat-card:nth-child(3) .stat-change {
+  color: #22a66d;
+}
+
+.stat-card:nth-child(4) .stat-change {
+  color: #e08b36;
 }
 
 .stat-description {
@@ -231,14 +357,14 @@
 
   background: #ffffff;
 
-  border: 1px solid #e0eaf2;
+  border: 1px solid #e0e7f0;
 
-  border-radius: 14px;
+  border-radius: 15px;
 
   padding: 20px;
 
   box-shadow:
-    0 3px 12px rgba(61, 91, 116, 0.06);
+    0 5px 18px rgba(31, 41, 55, 0.055);
 
   transition:
     transform 0.25s ease,
@@ -253,10 +379,10 @@
 .analytics-card:hover {
   transform: translateY(-2px);
 
-  border-color: #cfdeea;
+  border-color: #d4d9e8;
 
   box-shadow:
-    0 9px 24px rgba(61, 91, 116, 0.09);
+    0 10px 26px rgba(31, 41, 55, 0.09);
 }
 
 .card-header {
@@ -301,6 +427,8 @@
   box-sizing: border-box;
 
   overflow: hidden;
+
+  padding: 5px;
 }
 
 .chart-container canvas {
@@ -369,7 +497,7 @@
 
   font-size: 28px;
 
-  color: #6b8fc1;
+  color: #7c5cfc;
 
   font-weight: 700;
 }
@@ -410,6 +538,8 @@
   box-sizing: border-box;
 
   overflow: hidden;
+
+  padding: 8px;
 }
 
 .candidate-chart-container canvas {
@@ -497,9 +627,9 @@
 
   min-width: 0;
 
-  height: 7px;
+  height: 8px;
 
-  background: #e7eef5;
+  background: #e9edf4;
 
   border-radius: 20px;
 
@@ -509,11 +639,51 @@
 .status-progress-bar {
   height: 100%;
 
-  background: #82b6e8;
-
   border-radius: 20px;
 
   transition: width 0.5s ease;
+}
+
+/* Pipeline mixed colors */
+
+.status-item:nth-child(1) .status-progress-bar {
+  background: linear-gradient(
+    90deg,
+    #7c5cfc,
+    #9a7cff
+  );
+}
+
+.status-item:nth-child(2) .status-progress-bar {
+  background: linear-gradient(
+    90deg,
+    #4f8df7,
+    #70a8ff
+  );
+}
+
+.status-item:nth-child(3) .status-progress-bar {
+  background: linear-gradient(
+    90deg,
+    #f59e42,
+    #ffb86b
+  );
+}
+
+.status-item:nth-child(4) .status-progress-bar {
+  background: linear-gradient(
+    90deg,
+    #22b573,
+    #55ca91
+  );
+}
+
+.status-item:nth-child(5) .status-progress-bar {
+  background: linear-gradient(
+    90deg,
+    #e85d75,
+    #f17d91
+  );
 }
 
 .percentage {
@@ -531,23 +701,23 @@
 }
 
 /* =========================
-   BLUE ACCENT DETAILS
+   CARD ACCENTS
 ========================= */
 
 .recruitment-card {
-  border-top: 3px solid #82b6e8;
+  border-top: 3px solid #7c5cfc;
 }
 
 .hiring-card {
-  border-top: 3px solid #b7d3ed;
+  border-top: 3px solid #f59e42;
 }
 
 .candidate-card {
-  border-top: 3px solid #9c83d4;
+  border-top: 3px solid #4f8df7;
 }
 
 .pipeline-card {
-  border-top: 3px solid #8fc7b5;
+  border-top: 3px solid #22b573;
 }
 
 /* =========================

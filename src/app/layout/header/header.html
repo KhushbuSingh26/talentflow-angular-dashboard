@@ -7,13 +7,32 @@
   </div>
 
   <div class="header-right">
-    <button class="icon-btn" title="Search">
+
+    <button
+      class="icon-btn"
+      title="Search"
+      type="button"
+    >
       🔍
     </button>
 
-    <button class="icon-btn notification-btn" title="Notifications">
+    <button
+      class="icon-btn notification-btn"
+      title="Notifications"
+      type="button"
+    >
       🔔
       <span class="notification-dot"></span>
+    </button>
+
+    <button
+      class="icon-btn theme-toggle"
+      type="button"
+      title="Toggle theme"
+      aria-label="Toggle dark and light theme"
+      (click)="toggleTheme()"
+    >
+      <span>{{ isDarkMode ? '☀️' : '🌙' }}</span>
     </button>
 
     <div class="header-profile">
@@ -24,5 +43,6 @@
         <span>Administrator</span>
       </div>
     </div>
+
   </div>
 </header>
