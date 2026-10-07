@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: column;
 
-  padding: 24px 16px;
+  padding: 13px 16px;
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -85,8 +85,9 @@
 .brand-logo {
   display: block;
 
-  width: 140px;
+  width: 60px;
   height: auto;
+margin-left: 15px;
 
   max-width: 100%;
 
