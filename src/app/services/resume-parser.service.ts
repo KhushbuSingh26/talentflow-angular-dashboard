@@ -29,7 +29,8 @@ export interface ResumeParseResponse {
   providedIn: 'root',
 })
 export class ResumeParserService {
-  private apiUrl = 'http://localhost:3001/resume/parse';
+  private apiUrl =
+    'https://talentflow-resume-parser-api.onrender.com/resume/parse';
 
   constructor(private http: HttpClient) {}
 
