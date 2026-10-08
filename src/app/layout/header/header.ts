@@ -8,41 +8,13 @@ import { Component } from '@angular/core';
 })
 export class Header {
 
-  isDarkMode = true;
-
   constructor() {
-    const savedTheme = localStorage.getItem('theme');
+    // Always use light theme
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
 
-    if (savedTheme === 'light') {
-      this.isDarkMode = false;
-    } else {
-      this.isDarkMode = true;
-    }
-
-    this.applyTheme();
+    // Remove old saved dark theme preference
+    localStorage.removeItem('theme');
   }
 
-  toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-
-    this.applyTheme();
-
-    localStorage.setItem(
-      'theme',
-      this.isDarkMode ? 'dark' : 'light'
-    );
-  }
-
-  private applyTheme(): void {
-    document.body.classList.remove(
-      'light-theme',
-      'dark-theme'
-    );
-
-    document.body.classList.add(
-      this.isDarkMode
-        ? 'dark-theme'
-        : 'light-theme'
-    );
-  }
 }
